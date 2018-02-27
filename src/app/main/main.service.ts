@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpParams, HttpClient, httpResponse } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class MainService {
 
   }
 
-  private handleError(response: httpResponse<any> | any){
+  private handleError(response: HttpResponse<any> | any){
 
     console.error('there was an error in the response', response);
 
