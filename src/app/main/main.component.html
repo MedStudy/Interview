@@ -1,4 +1,18 @@
 <p>
   main Component!
 </p>
-<button mat-button>Click me!</button>
+<input #user>
+<button mat-button (click)="getData(user.value)">Click me!!</button>
+
+<br>
+<p>Total Users:
+{{ list?.total_count }}
+
+<br>
+<p>Top Ten:
+<ol *ngIf="list?.items.length>0">
+  <li *ngFor="let item of list.items | limitTo">{{ item.login }}</li>
+</ol>
+
+<p>Raw:
+<pre>{{ list | json }}</pre>
