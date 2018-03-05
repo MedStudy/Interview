@@ -1,4 +1,11 @@
 <p>
-  main Component!
+  <input [(ngModel)]="searchText"/>
 </p>
-<button mat-button>Click me!</button>
+<button mat-button (click)="searchUsers()">Click me!</button>
+<hr>
+<ng-container *ngIf="searchResults | async as results">
+  Total User = {{ results.total_count}}
+  <ul>
+    <li *ngFor="let gitUser of results.items | slice:0:10  ">{{gitUser.login}}</li>
+  </ul>
+</ng-container>

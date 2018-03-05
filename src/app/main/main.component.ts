@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { GitUsersService, SearchResult } from '../services/gitUsers.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  private searchText: string;
+  private searchResults: Observable<SearchResult>;
+
+  constructor(private gitUsersService: GitUsersService) {
+  }
 
   ngOnInit() {
+    this.searchText = '';
+  }
+
+  private searchUsers(): void {
+    this.searchResults = this.gitUsersService.getUsers(this.searchText);
   }
 
 }
