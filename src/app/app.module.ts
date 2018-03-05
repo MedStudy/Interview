@@ -10,6 +10,9 @@ import { AppRoutes} from './app.routes';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
+import { GitUsersService } from './services/gitUsers.service';
+import { ConfigService } from './services/config.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,7 @@ import { MainComponent } from './main/main.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [GitUsersService, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
