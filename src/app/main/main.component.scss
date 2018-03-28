@@ -1,0 +1,73 @@
+.search-form {
+    padding: 20px;
+
+    .form-group {
+        input.search-bar.form-control {
+            width: calc(100vw - 135px);
+
+            &:focus {
+                outline: none;
+                border-bottom: 2px solid #2296f4;
+            }
+        }
+
+        button.btn.btn-success.mat-raised-button {
+            background: #2296f4;
+            color:  white;
+            font-size: 13pt;
+        }
+    }
+
+    .total-count {
+        margin: 40px 20px 20px;
+    }
+
+    .user-list-wrap {
+        margin: 10px 0;
+
+        .user-list {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            max-width: 500px;
+
+            .inline-block {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .index-number {
+                width:  20px;
+                text-align: right;
+                padding: 10px 20px;
+                box-sizing: border-box;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                overflow: hidden;
+                border-radius: 50%;
+                margin: 0 20px;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .user-content {
+                width: 370px;
+                padding: 3px 20px;
+                box-sizing: border-box;
+            }
+
+            .user-detail-wrap {
+                margin-bottom: 10px;
+
+                &.user-detail-wrap:last-child {
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+    }
+}
+

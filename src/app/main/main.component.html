@@ -1,4 +1,48 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<div class="search-form">
+    <form>
+
+        <div class="form-group">
+
+            <input
+                type="text"
+                name="search"
+                ng-model="user"
+                placeholder="Search Users"
+                class="search-bar form-control"
+            >
+
+            <button
+                mat-raised-button
+                (click)="getUsers()"
+                class="btn btn-success"
+            >
+                Search
+            </button>
+
+        </div>
+
+    </form>
+
+    <div *ngIf="totalCount != null" class="total-count">
+        <b>Total Number of Users:</b> {{ totalCount }}
+    </div>
+
+    <div class="user-list-wrap">
+        <div *ngFor="let item of users; let i = index">
+            <div *ngIf="i < 10" class="user-list">
+                <div class="index-number inline-block">{{ i + 1 }}:</div>
+                <div class="user-avatar inline-block"><img src={{item.avatar_url}} alt="Description" />:</div>
+                <div class="user-content inline-block">
+                    <div class="user-detail-wrap">
+                        <div class="inline-block"><b>Login:</b></div>
+                        <div class="inline-block"> {{ item.login }}</div>
+                    </div>
+                    <div class="user-detail-wrap">
+                        <div class="inline-block"><b>ID:</b></div>
+                        <div class="inline-block"> {{ item.id }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
