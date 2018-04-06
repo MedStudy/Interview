@@ -1,4 +1,22 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<!--USER SEARCH INPUT-->
+<div>
+  <span>
+    Find User:
+    <input type="text" id="txtUser" [(ngModel)]="txtUser">
+  </span>
+  <button mat-button name="b" (click)="checkUser($event)">Click me!</button>
+</div>
+<br>
+
+<!--USER SEARCH DETAIL-->
+<div>
+  <span style="font-weight:bold;font-size:18px">Results</span>
+  <br>
+  <span>Total Count:{{items?.total_count}}</span>
+  <ul *ngFor="let item of items?.items; let i = index">
+    <li *ngIf="i<10">
+      {{item?.login}}
+    </li>
+  </ul>
+</div>
+
