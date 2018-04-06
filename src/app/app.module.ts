@@ -9,7 +9,7 @@ import { AppRoutes} from './app.routes';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { MainComponent } from './main/main.component';
     MyMaterialModule,
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
