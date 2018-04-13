@@ -7,8 +7,35 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
   <app-root>Loading...</app-root>
+  
+    <script>
+		var request = new XMLHttpRequest();
+		
+		var username = "eric"
+
+		request.open('GET', 'https://api.github.com/search/users?q='+username, true);
+		request.onload = function () 
+		{
+
+			// Begin accessing JSON data here
+			var data = JSON.parse(this.response);
+			console.log(data);
+			console.log("Total Users Matching '" + username + "': " + data.total_count);
+			console.log("Top 10 Results: ")
+			for(var i = 0; i < 10; i++ )
+			{
+			console.log(data.items[i].login);
+			}
+
+		}
+		
+		request.send();
+		
+
+  </script>
 </body>
 </html>
