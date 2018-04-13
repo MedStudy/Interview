@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+.errorMessage {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; // github font spec
+  color: red;
+}
+.results {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; // github font spec
+  margin: 10px;
+}
+
+/* FiveWide BAND copied from another project I worked on */
+.FiveWideList {
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+.FiveWideList .FiveWideItem {
+  display: inline-block;
+  text-align: center;
+  width: calc(100% * (1/5) - 20px);
+  margin: 0 10px 20px 10px;
+}
+.FiveWideList .FiveWideItem .FiveWideImage {
+  width: 100%;
+}
+.FiveWideList .FiveWideItem .FiveWideImage img {
+  width: 100%;
+  display: block;
+}
+.FiveWideSeparator {
+  display: none;
+}
+@media (max-width: 767px) {
+  .FiveWideList {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+  .FiveWideList .FiveWideItem {
+    width: 100%;
+    margin: 0;
+  }
+  .FiveWideSeparator {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+/* few extra styles for bonus points :-) */
+.FiveWideList .FiveWideItem {
+  transition: background-color 0.5s ease;
+  a:link, a:visited {
+    text-decoration: none;
+    color: #111;
+  }
+  .FiveWideImage img {
+    transition: opacity 0.5s ease;
+  }
+}
+.FiveWideList .FiveWideItem:hover {
+  background-color: #bbb;
+  .FiveWideImage img {
+    opacity: .5;
+  }
+}
