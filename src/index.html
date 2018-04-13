@@ -10,32 +10,41 @@
 
 </head>
 <body>
-  <app-root>Loading...</app-root>
-  
+	<app-root>Loading...</app-root>
+	
+	<div>
+		<h2>Prototype Version</h2>
+		<input id="getUser" type="text" value="eric" />
+		<button id="displayUsers">Click me!</button>
+		<div id="populate"></div>
+	</div>
+
     <script>
 		var request = new XMLHttpRequest();
-		
-		var username = "eric"
+		var username = document.querySelector("#getUser").value;
 
 		request.open('GET', 'https://api.github.com/search/users?q='+username, true);
 		request.onload = function () 
 		{
 
+			var clickme = document.querySelector("#displayUsers");
+			var populate = document.querySelector("#populate");
+	
 			// Begin accessing JSON data here
 			var data = JSON.parse(this.response);
-			console.log(data);
-			console.log("Total Users Matching '" + username + "': " + data.total_count); 
-			console.log("Top 10 Results: ")
-			for(var i = 0; i < 10; i++ )
+			
+			clickme.addEventListener("click", function()
 			{
-			console.log(data.items[i].login);
-			}
+				populate.innerHTML = "Results for " + username + ": " + data.total_count + "<br>";
+				for(var i = 0; i < 10; i++ )
+					{
+						populate.innerHTML += data.items[i].login + "<br>";
+					}
+			});
 
 		}
 		
 		request.send();
-		
-
   </script>
 </body>
 </html>
