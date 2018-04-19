@@ -18,11 +18,11 @@ export class ReposComponent implements OnInit {
     this.getRepo(this.user)
   }
 
-  //subscrive to the promise
+  //subscribe 
   getRepo(name: string){
     this.gitService.getRepoInfo(name).subscribe( data => {
       this.repos = data;
-      console.log( data)  // TODO: REMOVE 
+     // console.log( data)  // TODO: REMOVE 
     }, err => console.log(err))
   }
 
