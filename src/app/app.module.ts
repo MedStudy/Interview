@@ -9,20 +9,27 @@ import { AppRoutes} from './app.routes';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
+import { HeaderComponent } from './header/header.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { ReposComponent} from './repos/repos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    HeaderComponent,
+    UserDetailComponent,
+    ReposComponent
   ],
   imports: [
-    RouterModule.forRoot(AppRoutes),
     MyMaterialModule,
     BrowserModule,
     FormsModule,
     HttpModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -7,3 +7,5 @@ export const AppRoutes = [
     component: MainComponent
   }
 ];
+
+// TODO: Make use of router - didnt have a use case in this particular app
