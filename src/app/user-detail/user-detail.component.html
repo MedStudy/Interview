@@ -1,0 +1,32 @@
+
+<div class="col-md-8" *ngIf="userData">
+    <div class="stats">
+    <span class="label label-default">{{userData.public_repos}} Repos</span>
+    <span class="label label-primary"> {{userData.public_gists}} Gists</span>
+    <span class="label label-success">{{userData.followers}} Followers</span>
+    <span class="label label-info"> {{userData.following}} Following</span>
+    </div>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Username: </strong>{{ userData.login }}</li> 
+         <li class="list-group-item"><strong>Location:  </strong>{{ userData.location }}</li>
+          <li class="list-group-item"><strong>Email:  </strong>{{ userData.email }}</li>
+           <li class="list-group-item"><strong>Bio:  </strong>{{ userData.bio }} </li> 
+            <li class="list-group-item"><strong>Member Since:  </strong>{{ userData.created_at }}</li>  
+    </ul>
+
+    <!-- <div class="row">
+      <h2>  <a (click)="toggle()">{{ message }}</a></h2>
+    </div>
+    <app-repos [user]="userData.login" *ngIf="visible"> </app-repos>
+</div> -->
+
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a (click)="toggle()">{{ message }}</a></li>
+    
+  </ul>
+  <app-repos [user]="userData.login" *ngIf="visible"> </app-repos>
+</div>
+
+
+ 

@@ -1,4 +1,58 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<app-header></app-header> 
+<h1> </h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <form>  
+        <div class="form-group">  <!-- form group for input search bar-->
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Github</span>
+            <input type="text"  autocomplete="off" class="form-control" name="userName" aria-describedby="basic-addon1" placeholder="Username" [(ngModel)]="userName" (keyup.enter)="onSearch()">
+          </div>
+          <br>
+        </div>
+      </form>
+      <div *ngIf="totalCount"  >
+          <!-- different look for paging-->
+          <!-- <nav > 
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav> -->
+
+            <button  class="btn btn-default" (click)="onPrevPage()"> << Prev Page </button>
+            <button class="btn btn-default" (click)="onNextPage()"> Next Page >> </button>
+            {{first}} - {{last}} of {{data.total_count}}
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <!-- if there is data in data {} display each user in data.items array from search criteria-->
+  <div *ngIf="data" >
+      <div class="panel panel-default" *ngFor="let user of data.items">
+        
+          <div class="panel-heading">
+              <h3 class="panel-title">{{user.login}}</h3>
+          </div>
+          <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-4">
+                      <img class="img-thumbnail github-avatar" src="{{user.avatar_url}}" >
+                  </div>
+                    <!-- DIsplay user detail information from user profile api call  "https://api.github.com/users/"+ gitName ...  -->
+                    <app-user-detail [user]="user.login"></app-user-detail>
+                    
+              </div>
+          </div>
+      </div>
+</div>
