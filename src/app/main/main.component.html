@@ -1,4 +1,26 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<form>
+  <mat-form-field>
+    <input matInput type="search"
+           placeholder="Search profiles"
+           #search
+           required>
+  </mat-form-field>
+  <button mat-button
+          (click)="searchProfiles(search.value)"
+          [disabled]="!search.value"
+  >
+    Search
+  </button>
+</form>
+<p *ngIf="loading">Searching...</p>
+<div class="results" *ngIf="searchResults.length && !loading">
+  <p>1-10 of {{ totalCount }} results</p>
+  <mat-list>
+    <ng-container *ngFor="let profile of searchResults let i=index">
+      <mat-list-item *ngIf="i < 10">
+        <img matListAvatar src="{{profile.avatar_url}}" alt="{{profile.login}}">
+        <p matLine>{{profile.login}}</p>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</div>
