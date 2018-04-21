@@ -1,0 +1,7 @@
+<div>
+
+    <span *ngIf="isExecuted">Total Users Found: {{searchResult.total_count}}</span>
+    <ul>
+        <app-user *ngFor="let user of pageOfUsers" [user]="user"></app-user>
+    </ul>
+</div>
