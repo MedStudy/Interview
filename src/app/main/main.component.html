@@ -1,4 +1,16 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <mat-form-field >
+            <input matInput type="text" placeholder="Enter user" 
+              formControlName="userSearchTextBox"
+              [(ngModel)]="user">
+          </mat-form-field>
+          <button type="submit" mat-raised-button>Search</button>
+          <app-user-list [searchUser]="user"></app-user-list>
+        </div>
+      </div>
+    </div>
+</form>
