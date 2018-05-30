@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GithubapiService } from '../services/githubapi.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+	 githubdata: any; 
+   userName="";
+
+  constructor(private apidata : GithubapiService) {
+
+   }
 
   ngOnInit() {
+
+      this.getData();
+  }
+
+  updateUser(){
+    this.getData()
+  }
+
+  getData(){
+      this.apidata.getdata(this.userName)
+      .subscribe(posts =>{
+        console.log(posts)
+        return this.githubdata=posts});
   }
 
 }
