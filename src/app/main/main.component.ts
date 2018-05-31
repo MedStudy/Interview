@@ -18,8 +18,6 @@ export class MainComponent implements OnInit {
    }
 
   ngOnInit() {
-
-      this.getData();
   }
 
   updateUser(){
@@ -29,7 +27,7 @@ export class MainComponent implements OnInit {
   getData(){
 
 if(this.regex.test(this.userName)){
-    this.isValid=!this.isValid
+      this.isValid=true;
     this.apidata.getdata(this.userName)
       .subscribe(posts =>{
         return this.githubdata=posts});
