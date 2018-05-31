@@ -10,6 +10,8 @@ export class MainComponent implements OnInit {
 
 	 githubdata: any; 
    userName="";
+    regex= /^[a-zA-Z]*$/;
+    isValid:boolean =true;
 
   constructor(private apidata : GithubapiService) {
 
@@ -25,10 +27,17 @@ export class MainComponent implements OnInit {
   }
 
   getData(){
-      this.apidata.getdata(this.userName)
+
+if(this.regex.test(this.userName)){
+    this.isValid=!this.isValid
+    this.apidata.getdata(this.userName)
       .subscribe(posts =>{
-        console.log(posts)
         return this.githubdata=posts});
-  }
+    }  
+
+    else{
+          this.isValid=!this.isValid
+      }
+    }
 
 }

@@ -17,7 +17,7 @@ export class GithubapiService {
 
 		getdata(userName){
 		    return this._http.get(this._url + userName)
-		.map(res => res.json());
+				.map(res => res.json());
 		}
 
 		

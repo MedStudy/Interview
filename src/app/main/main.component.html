@@ -1,7 +1,7 @@
 <input type="text" name="username" class="form-control" placeholder="Enter A Github Username..." [(ngModel)]="userName">
 
 <button mat-button  (click)="updateUser()">Click me!</button>
-<p></p>
+<p *ngIf="!isValid">Enter valid github username(username should contain only alphbates)</p>
 
 <div *ngIf="githubdata">
 <div class="outer-box">
