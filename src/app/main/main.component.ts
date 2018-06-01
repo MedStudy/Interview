@@ -9,9 +9,8 @@ import { GithubapiService } from '../services/githubapi.service';
 export class MainComponent implements OnInit {
 
 	 githubdata: any; 
-   userName="";
-    regex= /^[a-zA-Z]*$/;
-    isValid:boolean =true;
+   userName:string = '';
+   isValid:boolean = false;
 
   constructor(private apidata : GithubapiService) {
 
@@ -24,18 +23,25 @@ export class MainComponent implements OnInit {
     this.getData()
   }
 
-  getData(){
-
-if(this.regex.test(this.userName)){
-      this.isValid=true;
-    this.apidata.getdata(this.userName)
-      .subscribe(posts =>{
-        return this.githubdata=posts});
-    }  
-
-    else{
-          this.isValid=!this.isValid
-      }
+  getData() {
+    let regex = /^[a-zA-Z0-9_-]{3,}$/;
+    if ( !regex.test(this.userName) ) {
+      this.githubdata = [];
+      this.isValid = true;  
+      return;
+    }
+    this.isValid = true;
+    this.apidata.getdata( this.userName )
+    .subscribe(posts => {
+        if ( posts.total_count > 0 ) {
+          this.githubdata = posts
+          this.isValid = false;
+        } else {
+          this.githubdata = [];
+          this.isValid = true;
+        }
+      
+      });
     }
 
 }
