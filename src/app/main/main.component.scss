@@ -1,0 +1,8 @@
+.example-card {
+  max-width: 400px; flex:1;
+}
+.box { min-height: 200px; }
+.box img { width: 100%; }
+
+.outer-box {display: flex;
+    flex-wrap: wrap; }

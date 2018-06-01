@@ -1,4 +1,22 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<input type="text" name="username" class="form-control" placeholder="Enter A Github Username..." [(ngModel)]="userName">
+
+<button mat-button  (click)="updateUser()">Click me!</button>
+<p *ngIf="isValid">Enter valid github username(username should contain only alphbates)</p>
+
+<div *ngIf="githubdata">
+<div class="outer-box">
+<div class="box"  *ngFor="let item of githubdata.items;let i=index">
+<mat-card class="example-card" *ngIf="i<10">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{item.login}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="{{item.avatar_url}}" alt="Photo">
+</mat-card>
+</div>
+</div>
+</div>
+
+
+
+
