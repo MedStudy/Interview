@@ -1,4 +1,95 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="input-group">
+      <input 
+        id="search-box" class="form-control" 
+        type="text" name="search" placeholder="Enter a profile name"
+        (keyup.enter)="findProfiles(searchQuery)"
+        [(ngModel)]="searchQuery">
+      <span class="input-group-btn">
+        <button 
+          class="btn btn-primary" 
+          type="button"
+          (click)="findProfiles(searchQuery)">Find Profiles</button>
+      </span>
+    </div>
+    <div class="invalid-query text-danger tm-1"
+      *ngIf="!validQuery">Profile names may only contain alphanumeric characters or single hyphens</div>
+  </div>
+</div>
+
+<div *ngIf="searching">
+    <hr class="bm-1">
+    <div class="row" >
+      <div class="total col-xs-12">
+        <i class="spinner rm-1"></i>Finding profiles
+      </div>
+    </div>
+</div>
+
+<div class="no-results"
+  *ngIf="!searching && !profileTotal && queryString !== ''">
+    <hr class="bm-1">
+    <div class="row" >
+      <div class="total col-xs-12">
+        No profiles found for <strong>{{queryString}}</strong>
+      </div>
+    </div>
+</div>
+
+<div class="results"
+  *ngIf="!searching && profileTotal > 0">
+
+  <hr class="bm-1">
+
+  <div class="row" >
+    <div class="total col-xs-6">
+      <strong>Total profiles:</strong> {{profileTotal}}
+    </div>
+    <div class="simple-pager col-xs-6 text-right">
+      Page {{currentPage}} of {{totalPages}}
+      <button 
+        class="btn btn-default btn-sm"
+        *ngIf="currentPage > 1"
+        (click)="getPrevPage()"><i class="glyphicon glyphicon-chevron-left"></i> <span class="sr-only">Previous Page</span></button>
+      <button 
+        class="btn btn-default btn-sm"
+        (click)="getNextPage()"><i class="glyphicon glyphicon-chevron-right"></i> <span class="sr-only">Next Page</span></button>
+    </div>
+  </div>
+
+  <hr class="tm-1 bm-0">
+
+  <div class="row" 
+    *ngIf="profileTotal > 0">
+    <div class="col-sm-12">
+        <ul class="list-unstyled">
+            <li class="media p-15 tm-0"
+              *ngFor="let profile of profiles" >
+              <div class="media-left media-middle">
+                <img class="avatar media-object mr-3" src="{{profile.avatar_url}}" alt="{{profile.login}}">
+              </div>
+              
+              <div class="media-body">
+                  <div class="pull-right">
+                    <div class="score mb-0 text-center">
+                      {{profile.score | number: '1.0-0'}}
+                      <span class="score--label">Score</span>
+                    </div>
+                  </div>
+                  <h3 class="media-heading"><a href="{{profile.html_url}}" target="_blank">{{profile.login}}</a></h3>
+
+                  <ul class="list-inline">
+                    <li>APIS:</li>
+                    <li><a href="{{profile.reposs_url}}" target="_blank">Repos</a></li>
+                    <li><a href="{{profile.gists_url}}" target="_blank">Gists</a></li>
+                    <li><a href="{{profile.following_url}}" target="_blank">Following</a></li>
+                    <li><a href="{{profile.followers_url}}" target="_blank">Followers</a></li>
+                    <li><a href="{{profile.events_url}}" target="_blank">Events</a></li>
+                  </ul>
+              </div>
+            </li>
+          </ul>
+    </div>
+  </div>
+</div>
