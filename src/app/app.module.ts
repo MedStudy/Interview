@@ -9,6 +9,7 @@ import { AppRoutes} from './app.routes';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
+import { ProfileService } from './shared/profile.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { MainComponent } from './main/main.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    ProfileService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
