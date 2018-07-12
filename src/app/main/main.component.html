@@ -1,4 +1,26 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<mat-card>
+  <mat-card-content>
+    <form class="group" (ngSubmit)="onSubmit()" #searchForm="ngForm">
+      <mat-form-field>
+        <input matInput placeholder="Enter a name" [(ngModel)]="searchVal" name="searchVal">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>search</mat-icon> Search
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="hasSearched">
+  <mat-card-header>
+    <mat-card-title>Search results ({{searchResults.total_count}} {{searchResults.total_count == 1 ? "result" : "results"}})</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let res of searchResults.items | slice:0:10">
+        <p mat-line>
+          <img alt="" height="30" width="30" class="avatar width-full rounded-2" src="{{res.avatar_url}}" /> {{res.login}} </p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
