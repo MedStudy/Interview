@@ -13,9 +13,8 @@ export class SearchService {
     }
 
     searchUsers(term) {
-        console.log("SDAS")
-            let apiURL = this.apiRoot + "?q=" + term;
-            return this.http.get(apiURL)
+        let apiURL = this.apiRoot + "?q=" + term;
+        return this.http.get(apiURL)
             .map((res: Response) => res)
             .catch(this.handleError);
     }
@@ -25,5 +24,5 @@ export class SearchService {
         console.log(error)
         let errMsg = "Error searching";
         return Observable.throw(errMsg);
-      }
+    }
 }
