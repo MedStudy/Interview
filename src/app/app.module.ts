@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import {UiComponentsModule} from './ui/ui-components.module';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
     RouterModule.forRoot(AppRoutes),
     MyMaterialModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     UiComponentsModule
