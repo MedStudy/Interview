@@ -1,9 +1,19 @@
-<div>
+<div class="search-group">
     <mat-form-field class="">
-      <input #search
+      <input type="search"
+             #search
              matInput
+             (onsearch)="sendClear()"
              placeholder="Search By Username"
-             value=""
-             (input)="searchByUsername($event.target.value)">
+             value="">
     </mat-form-field>
+  <button mat-icon-button [color]="'primary'"
+          [disabled]="false"
+          (click)="searchByUsername(search.value)"
+          matTooltip="Search"
+          matTooltipPosition="right">
+    <i class="material-icons">
+      search
+    </i>
+  </button>
 </div>
