@@ -5,6 +5,7 @@ import {SearchComponent} from './search/search.component';
 import {UserCardComponent} from './user-card/user-card.component';
 import {SearchService} from '../services/search.service';
 import {ServicesModule} from '../services/services.module';
+import {LoadingComponent} from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -14,13 +15,15 @@ import {ServicesModule} from '../services/services.module';
   ],
   declarations: [
     SearchComponent,
-    UserCardComponent
+    UserCardComponent,
+    LoadingComponent
   ],
   exports: [
     MyMaterialModule,
     ServicesModule,
     SearchComponent,
-    UserCardComponent
+    UserCardComponent,
+    LoadingComponent
   ],
   providers: [
     SearchService
