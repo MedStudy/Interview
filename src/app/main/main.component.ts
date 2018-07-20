@@ -10,10 +10,19 @@ import {SearchService} from '../services/search.service';
 })
 export class MainComponent implements OnInit {
   searchResults$: Observable<SearchResults>;
+  errorMessage: String = null;
 
   constructor(private searchSrv: SearchService) { }
 
   ngOnInit() {
+  }
+
+  onSearchResults(results: Observable<SearchResults>): void {
+    this.searchResults$ = results.catch((error: any) => {
+      console.log('Error: ', error.statusText);
+      this.errorMessage = error.statusText;
+      return Observable.throw(error.status)
+    });
   }
 
   getAdditionalInfo(url: string): any {

@@ -3,17 +3,14 @@
       <input type="search"
              #search
              matInput
-             (onsearch)="sendClear()"
-             placeholder="Search By Username"
-             value="">
+             placeholder="Search By Username">
     </mat-form-field>
-  <button mat-icon-button [color]="'primary'"
-          [disabled]="false"
+  <button mat-icon-button
+          [color]="'primary'"
+          [disabled]="!search.value"
           (click)="searchByUsername(search.value)"
           matTooltip="Search"
           matTooltipPosition="right">
-    <i class="material-icons">
-      search
-    </i>
+    <i class="material-icons">search</i>
   </button>
 </div>

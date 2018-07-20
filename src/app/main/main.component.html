@@ -1,5 +1,5 @@
 <div class="header-section">
-  <app-search (searchResults)="searchResults$ = $event.searchResults$"></app-search>
+  <app-search (searchResults)="onSearchResults($event.searchResults$)"></app-search>
 </div>
 
 <div class="search-content"  *ngIf="searchResults$ | async; let searchResults; else nodata">
@@ -22,4 +22,11 @@
   </div>
 </div>
 
-<ng-template #nodata>Search results will appear here.</ng-template>
+<ng-template #nodata>
+  <div *ngIf="errorMessage; else loading">
+    <mat-error><strong>{{errorMessage}}</strong> | Please try a different username.</mat-error>
+  </div>
+  <ng-template #loading>
+    Search results will appear here.
+  </ng-template>
+</ng-template>

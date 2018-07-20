@@ -19,7 +19,4 @@ export class SearchComponent implements OnInit {
   searchByUsername(username: string): void {
     this.searchResults.emit({searchResults$: this.searchSrv.getByUserName(username)});
   }
-sendClear(): void{
-    console.log('Clear...')
-}
 }

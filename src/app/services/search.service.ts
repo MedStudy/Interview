@@ -15,8 +15,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   getByUserName(userName): Observable<SearchResults> {
-    return  this.http.get(ConstantsService.GIT_SEARCH_API + userName)
-      .catch((error: any) => Observable.throw(error.status));
+    return  this.http.get(ConstantsService.GIT_SEARCH_API + userName);
   }
 
   getMoreUserdata(url): Observable<any> {
