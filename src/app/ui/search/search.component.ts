@@ -1,7 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SearchService} from '../../services/search.service';
-import {Observable} from 'rxjs/Observable';
-import {SearchResults} from '../../models/git-user.model';
 
 @Component({
   selector: 'app-search',
