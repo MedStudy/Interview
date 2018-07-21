@@ -1,0 +1,24 @@
+:host{
+  .search-content {
+    display: flex;
+    flex-flow: column wrap;
+    .search-results {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      .user-card {
+        padding: 20px;
+        flex: 0 1 300px;
+        align-content: center;
+        .card-header {
+          display: flex;
+          flex-flow: row nowrap;
+          img {
+            padding-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+}

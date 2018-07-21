@@ -1,4 +1,34 @@
-<p>
-  main Component!
-</p>
-<button mat-button>Click me!</button>
+<div class="header-section">
+  <app-search (searchResults)="onSearchResults($event.searchResults$)"></app-search>
+</div>
+
+<div class="search-content"  *ngIf="searchResults$ | async; let searchResults; else nodata">
+  <div class="search-count">
+    <mat-chip-list>
+      <mat-chip color="primary" selected="true">Total Count: {{searchResults.total_count}}</mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <div class="search-results">
+    <app-user-card class="user-card" *ngFor="let user of searchResults.items | slice: 0 : 10">
+      <div cardHeader class="card-header">
+        <img mat-card-avatar src="{{user.avatar_url}}">
+        <div>
+          <mat-card-title>Username: {{user.login}}</mat-card-title>
+          <mat-card-subtitle>Score: {{user.score | number:'1.1-2'}}</mat-card-subtitle>
+        </div>
+      </div>
+    </app-user-card>
+  </div>
+</div>
+
+<ng-template #nodata>
+  <div *ngIf="errorMessage; else loading">
+    <mat-error><strong>{{errorMessage}}</strong> | Please try a different username.</mat-error>
+  </div>
+  <ng-template #loading>
+    Search results will appear here.
+  </ng-template>
+</ng-template>
+
+<app-loading *ngIf="isLoading$ | async"></app-loading>
