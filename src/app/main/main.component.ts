@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {SearchResults} from '../models/git-user.model';
 import {SearchService} from '../services/search.service';
+import {LoadingIndicatorService} from '../services/loading-indicator.service';
 
 @Component({
   selector: 'app-main',
@@ -11,10 +12,15 @@ import {SearchService} from '../services/search.service';
 export class MainComponent implements OnInit {
   searchResults$: Observable<SearchResults>;
   errorMessage: String = null;
+  isLoading$: Observable<boolean>;
 
-  constructor(private searchSrv: SearchService) { }
+  constructor(private searchSrv: SearchService,
+              private indicator: LoadingIndicatorService) {
+    this.isLoading$ = indicator.onLoadingChanged.asObservable()
+  }
 
   ngOnInit() {
+
   }
 
   onSearchResults(results: Observable<SearchResults>): void {
