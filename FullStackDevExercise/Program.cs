@@ -22,6 +22,7 @@ namespace FullStackDevExercise
       SetupDB(connection);
       CreateOwnersTable(connection);
       CreatePetsTable(connection);
+      CreateAppointmentsTable(connection);
     }
 
     private static void SetupDB(SqliteConnection connection) { 
@@ -33,11 +34,12 @@ namespace FullStackDevExercise
     {
       var createTable = connection.CreateCommand();
       createTable.CommandText = @"
+drop table owners;
         CREATE TABLE IF NOT EXISTS owners
         (
           id INTEGER PRIMARY KEY
-          , first_name VARCHAR(50) NOT NULL
-          , last_name VARCHAR(50) NOT NULL
+          , FirstName VARCHAR(50) NOT NULL
+          , LastName VARCHAR(50) NOT NULL
         )
       ";
       createTable.ExecuteNonQuery();
@@ -47,14 +49,34 @@ namespace FullStackDevExercise
     {
       var createTable = connection.CreateCommand();
       createTable.CommandText = @"
+        Drop table pets;
         CREATE TABLE IF NOT EXISTS pets
         (
           id INTEGER PRIMARY KEY
-          , owner_id INT NOT NULL
-          , type VARCHAR(50) NOT NULL
-          , name VARCHAR(50) NOT NULL
-          , age INT NOT NULL
-          , FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE ON UPDATE NO ACTION 
+          , OwnerId INTEGER NOT NULL
+          , Type VARCHAR(50) NOT NULL
+          , Name VARCHAR(50) NOT NULL
+          , Age INTEGER NOT NULL
+          , FOREIGN KEY (OwnerId) REFERENCES owners(id) ON DELETE CASCADE ON UPDATE NO ACTION 
+        )
+      ";
+      createTable.ExecuteNonQuery();
+    }
+
+    private static void CreateAppointmentsTable(SqliteConnection connection)
+    {
+      var createTable = connection.CreateCommand();
+      createTable.CommandText = @"
+        DROP TABLE appointments;
+        CREATE TABLE IF NOT EXISTS appointments
+        (
+          id INTEGER PRIMARY KEY
+          , OwnerId INTEGER NOT NULL
+          , PetId INTEGER NOT NULL
+          , AppointmentDate VARCHAR(50) NOT NULL
+          , IsComplete BIT
+          , FOREIGN KEY (OwnerId) REFERENCES owners(id) ON DELETE CASCADE ON UPDATE NO ACTION
+          , FOREIGN KEY (PetId) REFERENCES pets(id) ON DELETE CASCADE ON UPDATE NO ACTION
         )
       ";
       createTable.ExecuteNonQuery();

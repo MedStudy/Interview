@@ -1,0 +1,21 @@
+<div class="container">
+    <br>
+    <h2 style="display: inline;">Pets</h2>
+    <button class="btn btn-primary" [routerLink]="['/appointment/update']" style="float: right;">Add Appointment</button>
+    <br><hr>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let owner of owners">
+          <td [innerHTML]="owner.firstName"></td>
+          <td [innerHTML]="owner.lastName"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    

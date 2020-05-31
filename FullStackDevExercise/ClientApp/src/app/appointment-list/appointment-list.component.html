@@ -1,0 +1,33 @@
+<div class="container">
+  <br>
+  <h2 style="display: inline;">Appointments</h2>
+  <button class="btn btn-primary" [routerLink]="['/appointment/update']" style="float: right;">Add Appointment</button>
+  <br><hr>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Owner</th>
+        <th>Pet</th>
+        <th>Appointment Date</th>
+        <th>Actions</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <td [innerHTML]="appointment.owner.firstName + ' ' + appointment.owner.lastName"></td>
+        <td [innerHTML]="appointment.pet.name + ' (' + appointment.pet.type + ') - ' + appointment.pet.age + ' years old'"></td>
+        <td [innerHTML]="appointment.appointmentDate | date"></td>
+        <td>
+          <button [disabled]="appointment.isComplete" class="btn btn-primary" (click)="onEdit(appointment.id)">Edit</button>&nbsp;
+          <button class="btn btn-danger" (click)="onDelete(appointment.id)">Delete</button>&nbsp;
+          <button *ngIf="!appointment.isComplete" class="btn btn-secondary" (click)="onComplete(appointment.id)">Mark Complete</button> 
+        </td>
+        <td>
+          <label *ngIf="appointment.isComplete" class="badge badge-success">Complete</label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
