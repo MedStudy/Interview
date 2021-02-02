@@ -22,6 +22,7 @@ namespace FullStackDevExercise
       SetupDB(connection);
       CreateOwnersTable(connection);
       CreatePetsTable(connection);
+      CreateAppointmentTable(connection);
     }
 
     private static void SetupDB(SqliteConnection connection) { 
@@ -55,6 +56,23 @@ namespace FullStackDevExercise
           , name VARCHAR(50) NOT NULL
           , age INT NOT NULL
           , FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE ON UPDATE NO ACTION 
+        )
+      ";
+      createTable.ExecuteNonQuery();
+    }
+
+    private static void CreateAppointmentTable(SqliteConnection connection)
+    {
+      var createTable = connection.CreateCommand();
+      createTable.CommandText = @"
+        CREATE TABLE IF NOT EXISTS appointments
+        (
+          Id	INTEGER NOT NULL UNIQUE,
+	        Client_Name VARCHAR(100) NOT NULL,
+	        Pet_Type	VARCHAR(50),
+	        Age	INTEGER,
+	        Appoinment_Date	DATETIME NOT NULL,
+	        PRIMARY KEY(Id AUTOINCREMENT)
         )
       ";
       createTable.ExecuteNonQuery();

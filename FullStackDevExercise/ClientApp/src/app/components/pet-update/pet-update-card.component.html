@@ -1,0 +1,33 @@
+<h1 mat-dialog-title> Update Pet Details</h1>
+<div mat-dialog-content>
+  <mat-form-field style="width: 350px;">
+    <mat-label>Id</mat-label>
+    <input matInput [(ngModel)]="data.id" disabled>
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Owner id</mat-label>
+    <input matInput [(ngModel)]="data.owner_Id" disabled>
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Type</mat-label>
+    <input matInput [(ngModel)]="data.type">
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Age</mat-label>
+    <input matInput [(ngModel)]="data.age">
+  </mat-form-field>
+  
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>

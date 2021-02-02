@@ -1,0 +1,18 @@
+<h1 mat-dialog-title> Update Details</h1>
+<div mat-dialog-content>
+  <mat-form-field style="width: 350px;">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="data.first_Name">
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="data.last_Name">
+  </mat-form-field>
+  
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>

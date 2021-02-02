@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: 'app.component.html'
 })
+
 export class AppComponent {
-  title = 'ClientApp';
+    constructor(private router: Router){
+        console.log('Inside app component constructor')
+    }
+
 }

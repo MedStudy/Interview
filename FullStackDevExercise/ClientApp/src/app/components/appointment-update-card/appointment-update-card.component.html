@@ -1,0 +1,29 @@
+<h1 mat-dialog-title> Update Details</h1>
+<div mat-dialog-content>
+  <mat-form-field style="width: 350px;">
+    <mat-label>Client Name</mat-label>
+    <input matInput [(ngModel)]="data.client_Name">
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Pet Type</mat-label>
+    <input matInput [(ngModel)]="data.pet_Type">
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Age</mat-label>
+    <input matInput [(ngModel)]="data.age">
+  </mat-form-field>
+
+  <mat-form-field style="width: 350px;">
+    <mat-label>Appointment Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.appointment_Date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>

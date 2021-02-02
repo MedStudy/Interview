@@ -1,7 +1,10 @@
+using FullStackDevExercise.Services;
+using FullStackDevExercise.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,12 +23,19 @@ namespace FullStackDevExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddScoped<IPetService, PetService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddDbContext<MedStudyContext>(options =>
+              options.UseSqlite(Configuration.GetConnectionString("dolittle")));
             services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+                  // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +52,10 @@ namespace FullStackDevExercise
                 app.UseHsts();
             }
 
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
