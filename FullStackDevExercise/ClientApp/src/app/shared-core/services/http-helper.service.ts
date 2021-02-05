@@ -24,7 +24,8 @@ export class HttpHelperService {
   }
 
   resolveApiUrl(...urlParts: any[]) {
-    return `https://localhost:44397/${this.locationStrategy.getBaseHref()}api/${urlParts.map(r => r.toString()).filter(r => !!r).map(url => url.startsWith('/') ? url.substring(1) : url).join('/')}`
+    let baseurl: String = 'https://localhost:5001';
+    return `${baseurl}${this.locationStrategy.getBaseHref()}api/${urlParts.map(r => r.toString()).filter(r => !!r).map(url => url.startsWith('/') ? url.substring(1) : url).join('/')}`
     //return `${this.document.location.origin}${this.locationStrategy.getBaseHref()}api/${urlParts.map(r=>r.toString()).filter(r=>!!r).map(url => url.startsWith('/') ? url.substring(1) : url).join('/')}`
   }
 
