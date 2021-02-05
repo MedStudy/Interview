@@ -21,7 +21,7 @@ namespace FullStackDevExercise.Services
       _appointmentsRepository = appointmentsRepository;
     }
 
-    public async Task<AppointmentViewModel> GetById(int id) => _appointmentMapper.Encode(await _appointmentsRepository.GetAsync(id));
+    public AppointmentViewModel GetById(int id) => _appointmentMapper.Encode(_appointmentsRepository.GetAsync(id));
 
     public IEnumerable<AppointmentViewModel> GetByDate(int year, int month, int date)
     {
@@ -60,6 +60,11 @@ namespace FullStackDevExercise.Services
       var result = await _appointmentsRepository.DeleteAsync(id);
 
       return result == 1;
+    }
+
+    Task<AppointmentViewModel> IAppointmentService.GetById(int id)
+    {
+      throw new System.NotImplementedException();
     }
   }
 }

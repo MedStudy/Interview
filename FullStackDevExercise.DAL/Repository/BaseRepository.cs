@@ -20,8 +20,8 @@ namespace FullStackDevExercise.DAL.Repository
         _dbContext.Dispose();
     }
 
-    public abstract Task<IEnumerable<TEntity>> GetAsync();
-    public abstract Task<TEntity> GetAsync(long id);
+    public abstract IEnumerable<TEntity> GetAsync();
+    public abstract TEntity GetAsync(long id);
 
     public abstract Task<long> InsertAsync(TEntity data);
 

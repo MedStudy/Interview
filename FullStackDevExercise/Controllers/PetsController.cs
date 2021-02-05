@@ -27,9 +27,9 @@ namespace FullStackDevExercise.Controllers
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<ActionResult<PetViewModel>> Get(long ownerId, long id)
+    public ActionResult<PetViewModel> Get(long ownerId, long id)
     {
-      var result = await _petOwnerService.GetPetByIdAsync(ownerId, id);
+      var result = _petOwnerService.GetPetByIdAsync(ownerId, id);
 
       if (result == null) return NotFound();
 

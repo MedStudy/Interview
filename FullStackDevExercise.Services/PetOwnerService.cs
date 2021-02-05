@@ -22,14 +22,14 @@ namespace FullStackDevExercise.Services
       _petMapper = petMapper;
     }
 
-    public async Task<IEnumerable<OwnerViewModel>> GetOwnersAsync()
+    public IEnumerable<OwnerViewModel> GetOwnersAsync()
     {
-      var owners = await _ownerRepo.GetAsync();
+      var owners = _ownerRepo.GetAsync();
 
       return owners?.Select(r => _ownerMapper.Encode(r));
     }
 
-    public async Task<OwnerViewModel> GetOwnerAsync(long id) => _ownerMapper.Encode(await _ownerRepo.GetAsync(id));
+    public OwnerViewModel GetOwnerAsync(long id) => _ownerMapper.Encode(_ownerRepo.GetAsync(id));
 
     public async Task<bool> SaveOwnerAsync(OwnerViewModel model)
     {
@@ -50,7 +50,7 @@ namespace FullStackDevExercise.Services
 
     public IList<PetViewModel> GetPetsByOwnerIdAsync(long ownerId) => _petMapper.ForOwnerId(ownerId).Encode(_petRepo.GetByOwnerIdAsync(ownerId));
 
-    public async Task<PetViewModel> GetPetByIdAsync(long ownerId, long id) => _petMapper.ForOwnerId(ownerId).Encode(await _petRepo.GetAsync(id));
+    public PetViewModel GetPetByIdAsync(long ownerId, long id) => _petMapper.ForOwnerId(ownerId).Encode(_petRepo.GetAsync(id));
 
     public async Task<bool> SavePetAsync(long ownerId, PetViewModel model)
     {

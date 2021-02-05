@@ -17,12 +17,13 @@ namespace FullStackDevExercise.DAL.Repository
       throw new System.NotImplementedException();
     }
 
-    public override Task<IEnumerable<OwnerEntity>> GetAsync()
+    public override IEnumerable<OwnerEntity> GetAsync()
     {
-      throw new System.NotImplementedException();
+      var data = _dbContext.Owners;
+      return data;
     }
 
-    public override Task<OwnerEntity> GetAsync(long id)
+    public override OwnerEntity GetAsync(long id)
     {
       throw new System.NotImplementedException();
     }

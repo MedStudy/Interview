@@ -20,12 +20,12 @@ namespace FullStackDevExercise.DAL.Repository
       throw new NotImplementedException();
     }
 
-    public override Task<IEnumerable<AppointmentEntity>> GetAsync()
+    public override IEnumerable<AppointmentEntity> GetAsync()
     {
       throw new NotImplementedException();
     }
 
-    public override Task<AppointmentEntity> GetAsync(long id)
+    public override AppointmentEntity GetAsync(long id)
     {
       throw new NotImplementedException();
     }

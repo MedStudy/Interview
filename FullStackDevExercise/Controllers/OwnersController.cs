@@ -20,17 +20,17 @@ namespace FullStackDevExercise.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult> Get()
+    public ActionResult Get()
     {
-      var result = await _petOwnerService.GetOwnersAsync();
+      var result = _petOwnerService.GetOwnersAsync();
       return Ok(result);
     }
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<ActionResult<OwnerViewModel>> Get(long id)
+    public ActionResult<OwnerViewModel> Get(long id)
     {
-      var result = await _petOwnerService.GetOwnerAsync(id);
+      var result = _petOwnerService.GetOwnerAsync(id);
 
       if (result == null) return NotFound();
 

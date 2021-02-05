@@ -17,12 +17,12 @@ namespace FullStackDevExercise.DAL.Repository
       throw new System.NotImplementedException();
     }
 
-    public override Task<IEnumerable<PetEntity>> GetAsync()
+    public override IEnumerable<PetEntity> GetAsync()
     {
       throw new System.NotImplementedException();
     }
 
-    public override Task<PetEntity> GetAsync(long id)
+    public override PetEntity GetAsync(long id)
     {
       throw new System.NotImplementedException();
     }
