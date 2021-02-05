@@ -23,18 +23,18 @@ namespace FullStackDevExercise.Services
 
     public async Task<AppointmentViewModel> GetById(int id) => _appointmentMapper.Encode(await _appointmentsRepository.GetAsync(id));
 
-    public async Task<IEnumerable<AppointmentViewModel>> GetByDate(int year, int month, int date)
+    public IEnumerable<AppointmentViewModel> GetByDate(int year, int month, int date)
     {
-      var result = await _appointmentsRepository.GetByDate(year, month, date);
+      var result = _appointmentsRepository.GetByDate(year, month, date);
 
       if (result?.Count() == 0) return null;
 
       return _appointmentMapper.Encode(result.ToList());
     }
 
-    public async Task<IEnumerable<MonthlyAppointmentSummaryViewModel>> GetMonthSummary(int year, int month)
+    public IEnumerable<MonthlyAppointmentSummaryViewModel> GetMonthSummary(int year, int month)
     {
-      var result = await _appointmentsRepository.GetMonthlySummary(year, month);
+      var result = _appointmentsRepository.GetMonthlySummary(year, month);
 
       return result?.Select(r => new MonthlyAppointmentSummaryViewModel() { Date = r.Key, Count = r.Value });
     }

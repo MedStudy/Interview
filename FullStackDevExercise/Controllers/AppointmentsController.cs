@@ -29,17 +29,17 @@ namespace FullStackDevExercise.Controllers
 
 
     [Route("{year}/{month}/{date}")]
-    public async Task<ActionResult<IEnumerable<AppointmentViewModel>>> GetByDate(int year, int month, int date)
+    public ActionResult<IEnumerable<AppointmentViewModel>> GetByDate(int year, int month, int date)
     {
-      var result = await _appointmentsService.GetByDate(year, month+1, date);
+      var result = _appointmentsService.GetByDate(year, month+1, date);
 
       return Ok(result);
     }
 
     [Route("summary/{year}/{month}")]
-    public async Task<ActionResult<IEnumerable<MonthlyAppointmentSummaryViewModel>>> GetSummaryForMonth(int year, int month)
+    public ActionResult<IEnumerable<MonthlyAppointmentSummaryViewModel>> GetSummaryForMonth(int year, int month)
     {
-      return Ok(await _appointmentsService.GetMonthSummary(year, month));
+      return Ok(_appointmentsService.GetMonthSummary(year, month));
     }
 
     [HttpPost]

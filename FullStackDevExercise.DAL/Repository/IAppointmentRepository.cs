@@ -7,7 +7,7 @@ namespace FullStackDevExercise.DAL.Repository
 {
   public interface IAppointmentRepository: IRepository<AppointmentEntity>
   {
-    Task<IEnumerable<AppointmentEntity>> GetByDate(int year, int month, int date);
-    Task<Dictionary<DateTime, int>> GetMonthlySummary(int year, int month);
+    IEnumerable<AppointmentEntity> GetByDate(int year, int month, int date);
+    Dictionary<DateTime, int> GetMonthlySummary(int year, int month);
   }
 }
