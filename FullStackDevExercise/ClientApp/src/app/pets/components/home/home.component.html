@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1>Pets list - <small>{{ownerName}}</small></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <shared-services-pets-list *ngIf="ownerId" [ownerId]="ownerId"></shared-services-pets-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title" [innerHtml]="displayTitle"></h4>
+  <button type="button" *ngIf="config.allowDismiss" class="close" aria-label="Close"
+          (click)="activeModal.dismiss()">
+    <span class="fa fa-times text-danger"></span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="formGroup" *ngIf="formGroup">
+    <div *ngFor="let col of config.fields">
+      <div *ngIf="!col.isHidden">
+        <div *ngIf="getType(col)==='string'">
+          <div class="form-group">
+            <label for="input_text_{{col.fieldName}}">{{col.title}}:</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid':formGroup.get(col.fieldName).invalid}" [formControlName]="col.fieldName" id="input_text_{{col.fieldName}}" />
+          </div>
+        </div>
+        <div *ngIf="getType(col)=== 'select'">
+          <div class="form-group">
+            <label for="input_text_{{col.fieldName}}">{{col.title}}</label>
+            <select class="form-control" [ngClass]="{'is-invalid':formGroup.get(col.fieldName).invalid}" [formControlName]="col.fieldName" id="input_text_{{col.fieldName}}">
+              <option *ngFor="let optionItem of col.type" [value]="optionItem.value">{{optionItem.text}}</option>
+            </select>
+          </div>
+        </div>
+        <div *ngIf="getType(col)=== 'number'">
+          <div class="form-group">
+            <label for="input_text_{{col.fieldName}}">{{col.title}}:</label>
+            <input type="number" class="form-control" [formControlName]="col.fieldName" [ngClass]="{'is-invalid':formGroup.get(col.fieldName).invalid}" id="input_text_{{col.fieldName}}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button *ngFor="let button of config.buttons" [attr.disabled]="button.enabled()?null:true" (click)="buttonClicked(button)" class="btn" [ngClass]="{'btn-primary':button.isDefault, 'btn-danger':button.isDanger}">
+    <span [ngClass]="button.iconCss"></span>
+    <span *ngIf="button.iconCss&&button.label">&nbsp;</span>
+    <span>{{button.label}}</span>
+  </button>
+</div>
