@@ -55,21 +55,21 @@ export class HomeComponent implements OnInit {
   }
 
   onCreateAppointmentClicked() {
-    //let freeSlots = this.appointmentsService.getSlotsForDay(this.selectedDate)?.filter(r => !r.isInactive && this.appointments.findIndex(a => this.dateTimeService.isWithinTimePeriod(r.start, a.slotFrom, a.slotTo)));
-    //this.freeSlots = freeSlots;
+    let freeSlots = this.appointmentsService.getSlotsForDay(this.selectedDate)?.filter(r => !r.isInactive && this.appointments.findIndex(a => this.dateTimeService.isWithinTimePeriod(r.start, a.slotFrom, a.slotTo)));
+    this.freeSlots = freeSlots;
 
-    //this.appointmentDialogService.saveAppointment(
-    //  new Appointment(),
-    //  freeSlots,
-    //  this.appointments,
-    //  this.selectedDate
-    //)
-    //  .subscribe(r => {
-    //    debugger;
-    //    if (!r) return;
+    this.appointmentDialogService.saveAppointment(
+      new Appointment(),
+      freeSlots,
+      this.appointments,
+      this.selectedDate
+    )
+      .subscribe(r => {
+        debugger;
+        if (!r) return;
 
-    //    this.refreshComponents();
-    //  });
+        this.refreshComponents();
+      });
   }
 
   onCancelAppointmentClicked() {
