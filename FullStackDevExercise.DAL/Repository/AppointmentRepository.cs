@@ -91,17 +91,27 @@ namespace FullStackDevExercise.DAL.Repository
       var end = Convert.ToDateTime(endDate.ToString("yyyy-MM-dd"));
 
       var result = _dbContext.Appointments
-                         .GroupBy(a => a.slot_from.Substring(0, 11))
+                         .GroupBy(a => a.slot_from.Substring(0, 10))
                          .Select(g => new
                          {
-                           Key = Convert.ToDateTime(g.Key),
+                           g.Key,
                            Value = g.Count()
-                         })
-                         .Where(g => g.Key >=start && g.Key <= end)
+                         })                         
                          .OrderBy(g => g.Value)
-                         .ToList();    
-
-      return result.ToDictionary(x => x.Key, x => x.Value);
+                         .ToList();
+      var data = new Dictionary<DateTime, int>();
+      if (result != null)
+      {
+        foreach (var g in result)
+        {
+          var date = Convert.ToDateTime(g.Key);
+          if (date >= start && date <= end)
+          {
+            data.Add(date, g.Value);
+          }
+        }
+      }
+      return data;
     }
 
     private string PadZero(int number) => number.ToString("D2");
