@@ -1,0 +1,10 @@
+.dayCalendar td:hover {
+    background-color: #e4e5e5;
+    cursor: pointer;
+  }
+
+  .booked{
+      border-left: 0px;
+      border-right: 0px;
+      background-color: mediumspringgreen;
+  }

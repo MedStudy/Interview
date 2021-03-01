@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.cell{
+    min-height: 40px;
+    border: 1px solid rgba(204, 204, 204, 0.472);
+}
+.booked{
+    background-color: aquamarine;
+}
+.booking{
+    background-color: yellowgreen;
+}

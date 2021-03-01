@@ -1,0 +1,7 @@
+<div class="cell" [ngClass]="hourSlot.slotStatus" (click)="disableCellClick?$event.stopPropagation():notifySlotSelected.emit(slotId)" style="cursor: pointer;"> 
+  {{hourSlot.timeText}}
+  <span *ngIf="slotId==hourSlot.appointment?.slotFrom" style="font-weight: bold;">{{hourSlot.appointment?.petId}} 
+    {{hourSlot.appointment?.owner?.firstName}} 
+  </span>
+</div>
+

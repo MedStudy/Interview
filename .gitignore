@@ -39,3 +39,9 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+/.vs
+/FullStackDevExercise/.vscode
+/FullStackDevExercise.BLL/bin/Debug/netcoreapp3.1
+/FullStackDevExercise.BLL/obj
+/FullStackDevExercise.Data/bin/Debug/netcoreapp3.1
+/FullStackDevExercise.Data/obj

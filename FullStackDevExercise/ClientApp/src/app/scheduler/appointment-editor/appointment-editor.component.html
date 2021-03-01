@@ -1,0 +1,52 @@
+<h3>Appointment</h3>
+<div class="form-group">
+  <label style="font-weight: bold;">
+    {{selectedDate}}
+    Time: {{slotFromTime}} to {{slotToTime}}
+  </label>
+</div>
+<div class="form-group">
+  <label class="flex-grow-1">
+    Owner
+  </label>
+  <div class="d-flex">
+    <div class="flex-grow-1">
+      <select class="form-control" [(ngModel)]="selectedOwnerId" (change)="onOwnerChange($event)">
+        <!-- <select class="form-control" [attr.disabled]="owner?.id>0?null:true" (change)="onSelectedPetChanged($event)" [(ngModel)]="selectedPetId"> -->
+        <option *ngFor="let owner of owners" [ngValue]="owner.id">
+          {{owner.firstName}}
+        </option>
+      </select>
+    </div>
+    <div>
+      <!-- <button class="btn btn-xs btn-success" [attr.disabled]="isCreatingPet||!owner?true:null" (click)="createPet()"> -->
+      <button class="btn btn-xs btn-success">
+        <!-- <span *ngIf="true" class="fa fa-spinner fa-spin"></span> -->
+        <span *ngIf="true" class="fa fa-plus"></span>
+      </button>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="flex-grow-1">
+      Pet
+    </label>
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <select class="form-control" [(ngModel)]="selectedPetId" [attr.disabled]="selectedOwner?.id>0?null:true">
+          <option *ngFor="let pet of selectedOwner?.pets" [ngValue]="pet.id">
+            {{pet.name}} ({{pet.type}}, age: {{pet.age}})
+          </option>
+        </select>
+      </div>
+      <div>
+        <!-- <button class="btn btn-xs btn-success" [attr.disabled]="isCreatingPet||!owner?true:null" (click)="createPet()"> -->
+        <button class="btn btn-xs btn-success">
+          <!-- <span *ngIf="true" class="fa fa-spinner fa-spin"></span> -->
+          <span *ngIf="true" class="fa fa-plus"></span>
+        </button>
+      </div>
+    </div>
+    <div class="form-group mt-3">
+      <!-- <button class="btn btn-xs btn-success" [attr.disabled]="isCreatingPet||!owner?true:null" (click)="createPet()"> -->
+      <button class="btn btn-xs btn-success" [disabled]="!selectedPetId" (click)="bookAppointment()">Book</button>
+    </div>
