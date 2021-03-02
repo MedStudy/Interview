@@ -6,28 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FullStackDevExercise.Controllers
 {
-  [Route("api/[controller]")]
   [ApiController]
-  public class OwnerController : ControllerBase
+  [Route("api/[controller]")]
+  public class AppointmentController : ControllerBase
   {
-    private readonly IOwnerService ownerService;
-    public OwnerController(IOwnerService OwnerService)
+    private readonly IAppointmentService service;
+    public AppointmentController(IAppointmentService ApppointmentService)
     {
-      ownerService = OwnerService;
+      service = ApppointmentService;
     }
-    // GET: api/<OwnerController>
+
     [HttpGet]
     public IActionResult Get()
     {
-      var data = ownerService.GetAll();
+      var data = service.GetAll();
       return Ok(data);
     }
 
-    // GET api/<OwnerController>/5
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-      var data = ownerService.GetById(id);
+      var data = service.GetById(id);
       return Ok(data);
     }
 
@@ -35,9 +34,9 @@ namespace FullStackDevExercise.Controllers
     //Not following a 3 layered architecture here.
     //using DTO itself as there is no change in properties else a different view modal class is preferred.
     [HttpPost]
-    public int Post(OwnerDTO OwnerDTO)
+    public int Post(AppointmentDTO dto)
     {
-      return ownerService.Save(OwnerDTO);
+      return service.Save(dto);
     }
 
     //// PUT api/<OwnerController>/5
@@ -50,7 +49,7 @@ namespace FullStackDevExercise.Controllers
     [HttpDelete("{id}")]
     public void Delete(int id)
     {
-      ownerService.Delete(id);
+      service.Delete(id);
     }
   }
 }

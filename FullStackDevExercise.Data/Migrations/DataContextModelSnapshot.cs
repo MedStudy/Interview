@@ -16,19 +16,45 @@ namespace FullStackDevExercise.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.3");
 
+            modelBuilder.Entity("FullStackDevExercise.Data.Entities.Appointment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("appointment_date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("pet_id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("slot_from")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("slot_to")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("pet_id");
+
+                    b.ToTable("appointments");
+                });
+
             modelBuilder.Entity("FullStackDevExercise.Data.Entities.Owner", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("firstName")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("first_name");
+                    b.Property<string>("first_name")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("lastName")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("last_name");
+                    b.Property<string>("last_name")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
@@ -38,14 +64,8 @@ namespace FullStackDevExercise.Data.Migrations
                         new
                         {
                             id = 1,
-                            firstName = "Rony",
-                            lastName = "Jose"
-                        },
-                        new
-                        {
-                            id = 2,
-                            firstName = "Ann",
-                            lastName = "Jose"
+                            first_name = "Peter",
+                            last_name = "Pan"
                         });
                 });
 
@@ -61,7 +81,7 @@ namespace FullStackDevExercise.Data.Migrations
                     b.Property<string>("name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("owner_id")
+                    b.Property<int>("owner_id")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("type")
@@ -78,16 +98,30 @@ namespace FullStackDevExercise.Data.Migrations
                         {
                             id = 1,
                             age = 1,
-                            name = "Dude",
-                            type = "Huskey Dog"
+                            name = "Duke",
+                            owner_id = 1,
+                            type = "dog"
                         });
+                });
+
+            modelBuilder.Entity("FullStackDevExercise.Data.Entities.Appointment", b =>
+                {
+                    b.HasOne("FullStackDevExercise.Data.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("pet_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pet");
                 });
 
             modelBuilder.Entity("FullStackDevExercise.Data.Entities.Pet", b =>
                 {
                     b.HasOne("FullStackDevExercise.Data.Entities.Owner", "Owner")
                         .WithMany()
-                        .HasForeignKey("owner_id");
+                        .HasForeignKey("owner_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Owner");
                 });

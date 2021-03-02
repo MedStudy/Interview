@@ -26,10 +26,10 @@ namespace FullStackDevExercise.Data.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    owner_id = table.Column<int>(type: "INTEGER", nullable: false),
                     type = table.Column<string>(type: "TEXT", nullable: true),
                     name = table.Column<string>(type: "TEXT", nullable: true),
-                    age = table.Column<int>(type: "INTEGER", nullable: false),
-                    owner_id = table.Column<int>(type: "INTEGER", nullable: true)
+                    age = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,8 +39,18 @@ namespace FullStackDevExercise.Data.Migrations
                         column: x => x.owner_id,
                         principalTable: "owners",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "owners",
+                columns: new[] { "id", "first_name", "last_name" },
+                values: new object[] { 1, "Peter", "Pan" });
+
+            migrationBuilder.InsertData(
+                table: "pets",
+                columns: new[] { "id", "age", "name", "owner_id", "type" },
+                values: new object[] { 1, 1, "Duke", 1, "dog" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_pets_owner_id",
