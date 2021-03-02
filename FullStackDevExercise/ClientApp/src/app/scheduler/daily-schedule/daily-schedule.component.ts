@@ -1,6 +1,6 @@
 import { NullTemplateVisitor } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDate, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Appointment } from 'src/app/core/models/appointment.model';
 import { HourSlot, SlotSatus } from 'src/app/core/models/hour-slot.model';
 import { AppointmentService } from '../../core/services/appointment.service';
@@ -15,19 +15,16 @@ import { SharedDataService } from 'src/app/core/services/shared-data.service';
 })
 export class DailyScheduleComponent implements OnInit {
 
-  //TODO make it as class
-  //hours: Hour[];
-  //slotsPerHour: number = 4; //instead of this change checking to slotsPerHourArray.length
   closeResult: string;
   workingHours: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   slotNoStart: number;
   slotNoEnd: number;
-  //mapTest: any;
   appointments: Array<Appointment>;
   slotsPerHourArray: number[] = [0, 1, 2, 3];
   nextBookedSlot: number;
   hourSlots: HourSlot[] = [];
   selectedSlots: object;
+  selectedDate: any;
 
   // message: string;
   // subscription: Subscription;
@@ -36,29 +33,37 @@ export class DailyScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.initHourSlots();
+    this.selectedDate = new Date(Date.now()).toLocaleDateString();
     this.populateAppointments()
     // this.subscription = this.sharedData.currentMessage.subscribe(message => { 
     //   this.message = message;
     // })
   }
 
+  isDisabled = (date: NgbDate, current: { month: number, year: number }) => date.month !== current.month;
+  //TODO Fix
+  // hasAppointments = (date: NgbDate) => {
+  //   let convDate=new Date(date.year, date.month, date.day).toLocaleDateString();
+  //   let dayBookings=this.appointments.filter(c => c.appointmentDate?.toLocaleDateString() == convDate)
+  //   return dayBookings.length>0;
+  // };
+
   populateAppointments() {
-    //Get list of appointments, from these map hoursList and assign to map set
-    this.appointmentService.getAll().subscribe((result) => {
+    //Get list of appointments and iterate through the hourSlots marking them as "Booked"
+    this.appointmentService.getAll(this.selectedDate).subscribe((result) => {
       this.appointments = result;
       //let _this=this;
-      //TODO assign hour slotStatus to booked for booked slots
+      //TODO Add more comment for implemented logic
       for (var i = 0; i < this.appointments.length; i++) {
         let hs: HourSlot = this.hourSlots.filter(c => c.id == this.appointments[i].slotFrom)[0]
         hs.slotStatus = SlotSatus.Booked;
         hs.appointment = this.appointments[i];
-        //to avoid floating point add issue like 9.1+0.1=9.299999999999999 
+        //to avoid floating point "add" operation issue like 9.1+0.1=9.299999999999999 
         let slotNo: number = this.calcNextSlotNo(this.appointments[i].slotFrom);
         while (slotNo <= this.appointments[i].slotTo) {
           let hs: HourSlot = this.hourSlots.filter(c => c.id == slotNo)[0]
           hs.slotStatus = SlotSatus.Booked;
           hs.appointment = this.appointments[i];
-          //this.mapTest.set(slotNo, hs);
           slotNo = this.calcNextSlotNo(slotNo);
         }
       }
@@ -77,16 +82,13 @@ export class DailyScheduleComponent implements OnInit {
   }
 
   initHourSlots() {
-    //this.mapTest = new Map();
     //represent in 24hr timing for easy mathematical calculations
     for (var h = 9; h <= 17; h++) {
       for (var s = 0; s < this.utilService.slotsPerHour; s++) {
-        //this.mapTest.set(h * 10 + (s), null);
         let timeText = this.getCellTimeText(h, s)
         this.hourSlots.push(new HourSlot(h * 10 + (s), SlotSatus.None, null, timeText))
       }
     }
-    //console.log(this.mapTest);
   }
 
   getCellTimeText(h: number, s: number) {
@@ -150,7 +152,7 @@ export class DailyScheduleComponent implements OnInit {
     }
     this.selectedSlots = {
       slotFrom: this.slotNoStart,
-      slotTo: this.slotNoEnd //TODO find prev booked slot if not last slot in matrix, also check if last slot is booked.(this is an exception case)
+      slotTo: this.slotNoEnd 
     };
     console.log(this.selectedSlots);
 
@@ -170,6 +172,14 @@ export class DailyScheduleComponent implements OnInit {
     // else
     //   this.selectSlotEnd = slotNumber;
     alert(slotNumber);
+  }
+
+  onDateSelect($event) {
+    this.slotNoStart = this.slotNoEnd = null;
+    this.selectedDate = new Date($event.year, $event.month-1, $event.day).toLocaleDateString();
+    //reset hourSlots and populate appointments of selected day.
+    this.hourSlots.forEach(c => { c.slotStatus = SlotSatus.None; c.appointment = null })
+    this.populateAppointments();
   }
 
   // open(content) {

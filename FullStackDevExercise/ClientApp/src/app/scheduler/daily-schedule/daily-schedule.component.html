@@ -1,12 +1,30 @@
 <!-- <h3 class="mt-2">Appointment</h3> -->
 <!-- start {{slotNoStart}} end{{slotNoEnd}} nextBookedSlot{{nextBookedSlot}} -->
 <div class="row mt-3">
-<div class="col-12 col-md-9">
-<div *ngFor="let hour of workingHours" class="row">
-<app-slot-cell class="col" style="padding: 0px;" *ngFor="let idx of slotsPerHourArray, let i=index" [slotId]="hour*10+i" [hourSlot] = "hourSlots|arrayFirstOrDefault:(hour*10+i)" (notifySlotSelected)="onNotifySlotSelected($event)"></app-slot-cell>
+
 </div>
-</div>
-<div class="col-12 col-md-3">
-    <app-appointment-editor *ngIf="slotNoStart" [selectedSlots]="selectedSlots" (notifyAppointmentBooked)="onAppointmentBooked($event)"></app-appointment-editor>
-</div>
+<div class="row mt-3">
+    <div class="col-12 col-md-8">
+        <div *ngFor="let hour of workingHours" class="row">
+            <app-slot-cell class="col" style="padding: 0px;" *ngFor="let idx of slotsPerHourArray, let i=index"
+                [slotId]="hour*10+i" [hourSlot]="hourSlots|arrayFirstOrDefault:(hour*10+i)"
+                (notifySlotSelected)="onNotifySlotSelected($event)"></app-slot-cell>
+        </div>
+        <div class="row">
+            <app-appointment-editor *ngIf="slotNoStart" [selectedSlots]="selectedSlots" [selectedDate]="selectedDate"
+            (notifyAppointmentBooked)="onAppointmentBooked($event)"></app-appointment-editor>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        <ngb-datepicker (dateSelect)="onDateSelect($event)" #d [dayTemplate]="customDay" [markDisabled]="isDisabled">
+        </ngb-datepicker>
+        <ng-template #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+            <span class="custom-day" [class.focused]="focused" 
+                  [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+              {{ date.day }}
+            </span> 
+          </ng-template>
+          <!-- [class.hasAppointments]="hasAppointments(date)" -->
+        
+    </div>
 </div>

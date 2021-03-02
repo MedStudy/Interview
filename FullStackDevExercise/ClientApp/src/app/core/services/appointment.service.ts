@@ -22,8 +22,9 @@ export class AppointmentService {
     return (Math.max.apply(Math, this.appointments.map(function (o) { return o.id; }))) + 1;
   }
 
-  getAll() {
-    return of(this.appointments);
+  getAll(date:Date) {
+    let bookings=this.appointments.filter(c=>c.appointmentDate==date);
+    return of(bookings);
   }
 
   save(data: Appointment): Observable<any> {

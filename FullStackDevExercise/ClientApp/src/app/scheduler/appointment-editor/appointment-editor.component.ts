@@ -14,6 +14,7 @@ import { UtilityService } from 'src/app/core/services/utility.service';
   styleUrls: ['./appointment-editor.component.css']
 })
 export class AppointmentEditorComponent implements OnInit, OnChanges {
+  @Input() selectedDate: any;
   @Input() selectedSlots: any;
   @Output() notifyAppointmentBooked = new EventEmitter<any>();
   //@Input() slotTo?: number;
@@ -23,7 +24,6 @@ export class AppointmentEditorComponent implements OnInit, OnChanges {
   owners: Owner[];
   slotFromTime: string;
   slotToTime: string;
-  selectedDate: any;
 
   message: string;
   subscription: Subscription;
@@ -39,7 +39,7 @@ export class AppointmentEditorComponent implements OnInit, OnChanges {
 
     });
     //console.log("child",this.owners);
-    this.selectedDate = new Date(Date.now()).toLocaleDateString();
+    //this.selectedDate = new Date(Date.now()).toLocaleDateString();
     this.slotFromTime = this.utilService.getTimeText(this.selectedSlots.slotFrom);
     this.slotToTime = this.utilService.getTimeText(this.selectedSlots.slotTo, true);
   }
