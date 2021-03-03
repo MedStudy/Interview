@@ -96,8 +96,8 @@ export class DailyScheduleComponent implements OnInit {
   getCellTimeText(h: number, s: number) {
     let time = "";
     let slotTime = (s * 15).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
-    if (h > 12)
-      time = (h - 12) + ":" + slotTime + " PM"
+    if (h >= 12)
+      time = (h == 12 ? h : (h - 12)) + ":" + slotTime + " PM"
     else
       time = (h) + ":" + slotTime + " AM"
     return time;

@@ -25,8 +25,8 @@ export class UtilityService {
     }
     let time = "";
     let slotMinutes = (slotMinutesIdx * 15).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });
-    if (slotHour > 12)
-      time = (slotHour - 12) + ":" + slotMinutes + " PM"
+    if (slotHour >= 12)
+      time = (slotHour == 12 ? slotHour:(slotHour - 12)) + ":" + slotMinutes + " PM"
     else
       time = (slotHour) + ":" + slotMinutes + " AM"
     return time;
