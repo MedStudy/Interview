@@ -1,3 +1,15 @@
+### Dev Comments
+**Home Page Screenshot**
+![HomePage](/ScreenShotHomePg.png)
+
+**To Do**
+- Show Appointments in calendar month view.
+- Owner & Pet list and delete screens.
+- Block appointment time slots, if current time has surpassed the slot time.
+- Add more validations.
+- Add a mock login screen.
+
+
 # Full Stack Developer/Engineer Coding Exercise
 
 ## Getting Started
