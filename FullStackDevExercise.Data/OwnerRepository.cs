@@ -1,4 +1,5 @@
 using FullStackDevExercise.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace FullStackDevExercise.Data
 
     public IQueryable<Owner> GetAll()
     {
-      return context.Owners.AsQueryable();
+      return context.Owners.Include(c => c.Pets);
     }
 
     public int Save(Owner owner)

@@ -5,9 +5,8 @@ using System.Text;
 
 namespace FullStackDevExercise.Services.DTOs
 {
-  public class AppointmentDTO
+  public class AppointmentDTO : BaseDTO
   {
-    public int Id { get; set; }
     [Range(90, 240)]
     public int SlotFrom { get; set; }
     [Range(90, 240)]
@@ -16,7 +15,11 @@ namespace FullStackDevExercise.Services.DTOs
     [Range(1, int.MaxValue)]
     public int PetId { get; set; }
     [Required]
-    public DateTime AppointmentDate { get; set; }
+    public string AppointmentDate { get; set; }
+
+    public PetDTO Pet { get; set; }
+    public OwnerDTO Owner { get; set; }
+
 
   }
 }

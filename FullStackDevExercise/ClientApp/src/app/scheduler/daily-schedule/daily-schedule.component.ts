@@ -19,12 +19,12 @@ export class DailyScheduleComponent implements OnInit {
   workingHours: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   slotNoStart: number;
   slotNoEnd: number;
-  appointments: Array<Appointment>;
+  appointments: Array<Appointment>|null;
   slotsPerHourArray: number[] = [0, 1, 2, 3];
   nextBookedSlot: number;
   hourSlots: HourSlot[] = [];
   selectedSlots: object;
-  selectedDate: any;
+  selectedDate: Date;
 
   // message: string;
   // subscription: Subscription;
@@ -33,7 +33,7 @@ export class DailyScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.initHourSlots();
-    this.selectedDate = new Date(Date.now()).toLocaleDateString();
+    this.selectedDate = new Date(Date.now());
     this.populateAppointments()
     // this.subscription = this.sharedData.currentMessage.subscribe(message => { 
     //   this.message = message;
@@ -50,21 +50,24 @@ export class DailyScheduleComponent implements OnInit {
 
   populateAppointments() {
     //Get list of appointments and iterate through the hourSlots marking them as "Booked"
-    this.appointmentService.getAll(this.selectedDate).subscribe((result) => {
-      this.appointments = result;
-      //let _this=this;
-      //TODO Add more comment for implemented logic
-      for (var i = 0; i < this.appointments.length; i++) {
-        let hs: HourSlot = this.hourSlots.filter(c => c.id == this.appointments[i].slotFrom)[0]
-        hs.slotStatus = SlotSatus.Booked;
-        hs.appointment = this.appointments[i];
-        //to avoid floating point "add" operation issue like 9.1+0.1=9.299999999999999 
-        let slotNo: number = this.calcNextSlotNo(this.appointments[i].slotFrom);
-        while (slotNo <= this.appointments[i].slotTo) {
-          let hs: HourSlot = this.hourSlots.filter(c => c.id == slotNo)[0]
+    console.log(this.selectedDate.toISOString());
+    this.appointmentService.getByDate(this.selectedDate.toISOString()).subscribe((result) => {
+      if (result != null) {
+        this.appointments = result;
+        //let _this=this;
+        //TODO Add more comment for implemented logic
+        for (var i = 0; i < this.appointments.length; i++) {
+          let hs: HourSlot = this.hourSlots.filter(c => c.id == this.appointments[i].slotFrom)[0]
           hs.slotStatus = SlotSatus.Booked;
           hs.appointment = this.appointments[i];
-          slotNo = this.calcNextSlotNo(slotNo);
+          //to avoid floating point "add" operation issue like 9.1+0.1=9.299999999999999 
+          let slotNo: number = this.calcNextSlotNo(this.appointments[i].slotFrom);
+          while (slotNo <= this.appointments[i].slotTo) {
+            let hs: HourSlot = this.hourSlots.filter(c => c.id == slotNo)[0]
+            hs.slotStatus = SlotSatus.Booked;
+            hs.appointment = this.appointments[i];
+            slotNo = this.calcNextSlotNo(slotNo);
+          }
         }
       }
       console.log(this.hourSlots);
@@ -102,16 +105,17 @@ export class DailyScheduleComponent implements OnInit {
   }
 
   findNextBookedSlot(slotNo: number) {
-    let bookings: Appointment[] = this.appointments.filter(c => c.slotFrom > slotNo)
-    if (bookings.length > 0) {
-      if (bookings.length > 1) {
-        bookings = bookings.sort((r1, r2) => r1.slotFrom > r2.slotFrom ? 1 : -1)
+    //set as last Slot 5:45pm (5=>17, 45/15(interval)=3)
+    this.nextBookedSlot = 173;
+    if (this.appointments !== undefined) {
+      let bookings: Appointment[] = this.appointments?.filter(c => c.slotFrom > slotNo)
+      if (bookings.length > 0) {
+        if (bookings.length > 1) {
+          bookings = bookings.sort((r1, r2) => r1.slotFrom > r2.slotFrom ? 1 : -1)
+        }
+        this.nextBookedSlot = bookings[0].slotFrom;
       }
-      this.nextBookedSlot = bookings[0].slotFrom;
     }
-    else
-      //set as last Slot 5:45pm (5=>17, 45/15(interval)=3)
-      this.nextBookedSlot = 173;//TOCHECK
   }
 
   onNotifySlotSelected(slotNo: number) {
@@ -152,7 +156,7 @@ export class DailyScheduleComponent implements OnInit {
     }
     this.selectedSlots = {
       slotFrom: this.slotNoStart,
-      slotTo: this.slotNoEnd 
+      slotTo: this.slotNoEnd
     };
     console.log(this.selectedSlots);
 
@@ -176,7 +180,7 @@ export class DailyScheduleComponent implements OnInit {
 
   onDateSelect($event) {
     this.slotNoStart = this.slotNoEnd = null;
-    this.selectedDate = new Date($event.year, $event.month-1, $event.day).toLocaleDateString();
+    this.selectedDate = new Date($event.year, $event.month - 1, $event.day);
     //reset hourSlots and populate appointments of selected day.
     this.hourSlots.forEach(c => { c.slotStatus = SlotSatus.None; c.appointment = null })
     this.populateAppointments();

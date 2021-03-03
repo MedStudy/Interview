@@ -10,6 +10,7 @@ namespace FullStackDevExercise.Data
   {
     Appointment GetById(int id);
     IQueryable<Appointment> GetAll();
+    IQueryable<Appointment> GetByDate(DateTime date);
     int Save(Appointment record);
     int Delete(int id);
   }

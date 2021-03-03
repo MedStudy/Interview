@@ -12,5 +12,7 @@ namespace FullStackDevExercise.Data.Entities
     public string first_name { get; set; }
     //[Column("last_name")]
     public string last_name { get; set; }
+
+    public List<Pet> Pets { get; set; }
   }
 }

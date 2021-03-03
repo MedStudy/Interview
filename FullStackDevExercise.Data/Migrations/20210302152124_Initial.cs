@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FullStackDevExercise.Data.Migrations
 {
@@ -50,7 +50,7 @@ namespace FullStackDevExercise.Data.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "id", "age", "name", "owner_id", "type" },
-                values: new object[] { 1, 1, "Duke", 1, "dog" });
+                values: new object[] { 1, 1, "Duke", 1, "Dog" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_pets_owner_id",

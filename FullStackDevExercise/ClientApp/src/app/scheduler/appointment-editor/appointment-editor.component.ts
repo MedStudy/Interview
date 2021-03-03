@@ -14,7 +14,7 @@ import { UtilityService } from 'src/app/core/services/utility.service';
   styleUrls: ['./appointment-editor.component.css']
 })
 export class AppointmentEditorComponent implements OnInit, OnChanges {
-  @Input() selectedDate: any;
+  @Input() selectedDate: Date;
   @Input() selectedSlots: any;
   @Output() notifyAppointmentBooked = new EventEmitter<any>();
   //@Input() slotTo?: number;
@@ -55,11 +55,12 @@ export class AppointmentEditorComponent implements OnInit, OnChanges {
   }
 
   bookAppointment() {
-    let appointment: Appointment = { id: this.appointmentService.getNextId(), slotFrom: this.selectedSlots.slotFrom, slotTo: this.selectedSlots.slotTo, appointmentDate: this.selectedDate, petId: this.selectedPetId, owner: this.selectedOwner };
+    let appointment: Appointment = { id: 0, slotFrom: this.selectedSlots.slotFrom, slotTo: this.selectedSlots.slotTo, appointmentDate: this.selectedDate.toISOString(), petId: this.selectedPetId };
     console.log(appointment);
-    this.appointmentService.save(appointment);
+    this.appointmentService.save(appointment).subscribe((result) => {
+      this.notifyAppointmentBooked.emit(this.selectedSlots.slotFrom)
+    });
     //this.sharedData.changeMessage("book msg" + this.selectedSlots.slotFrom)
-    this.notifyAppointmentBooked.emit(this.selectedSlots.slotFrom)
   }
   ngOnDestroy() {
     //this.subscription.unsubscribe();

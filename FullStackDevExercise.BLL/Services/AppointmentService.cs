@@ -26,6 +26,15 @@ namespace FullStackDevExercise.Services.Services
       return dtoData;
     }
 
+    public List<AppointmentDTO> GetByDate(DateTime date)
+    {
+      var appointments = repository.GetByDate(date).ToList();
+      if (appointments.Count>0)
+        return mapper.Map<List<AppointmentDTO>>(appointments);
+      return null;
+    }
+
+
     public AppointmentDTO GetById(int Id)
     {
       var data = repository.GetById(Id);
@@ -36,7 +45,7 @@ namespace FullStackDevExercise.Services.Services
     public int Save(AppointmentDTO dto)
     {
       var entity = mapper.Map<Appointment>(dto);
-      return repository.Save(entity); 
+      return repository.Save(entity);
     }
 
     public void Delete(int Id)

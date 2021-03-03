@@ -1,4 +1,5 @@
 using FullStackDevExercise.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace FullStackDevExercise.Data
 {
-  public class AppointmentRepository: IAppointmentRepository
+  public class AppointmentRepository : IAppointmentRepository
   {
     private readonly DataContext context;
     public AppointmentRepository(DataContext Context)
@@ -17,6 +18,12 @@ namespace FullStackDevExercise.Data
     public Appointment GetById(int id)
     {
       return context.Appointments.Find(id);
+    }
+
+    public IQueryable<Appointment> GetByDate(DateTime date)
+    {
+      return context.Appointments.Include(c => c.Pet).ThenInclude(pet => pet.Owner)
+        .Where(q => q.appointment_date.Date == date.Date);
     }
 
     public IQueryable<Appointment> GetAll()

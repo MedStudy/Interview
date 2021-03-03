@@ -5,11 +5,12 @@ using System.Text;
 
 namespace FullStackDevExercise.Services.DTOs
 {
-  public class OwnerDTO
+  public class OwnerDTO : BaseDTO
   {
-    public int Id { get; set; }
     [Required]
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public List<PetDTO> Pets { get; set; }
+
   }
 }

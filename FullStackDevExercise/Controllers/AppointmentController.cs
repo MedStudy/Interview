@@ -2,7 +2,7 @@ using FullStackDevExercise.Models;
 using FullStackDevExercise.Services.Contracts;
 using FullStackDevExercise.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
-
+using System;
 
 namespace FullStackDevExercise.Controllers
 {
@@ -22,6 +22,21 @@ namespace FullStackDevExercise.Controllers
       var data = service.GetAll();
       return Ok(data);
     }
+
+    [Route("by-date/{bookDate}")]
+    public IActionResult GetByDate(string bookDate)
+    {
+      var result = service.GetByDate(DateTime.Parse(bookDate));
+      return Ok(result);
+    }
+
+    //TODO Later
+    //[Route("by-month/{month}")]
+    //public IActionResult GetByMonth(int month)
+    //{
+    //  var result = service.GetByDate(date);
+    //  return Ok(result);
+    //}
 
     [HttpGet("{id}")]
     public IActionResult GetById(int id)

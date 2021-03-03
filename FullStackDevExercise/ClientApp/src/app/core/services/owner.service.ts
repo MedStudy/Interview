@@ -3,6 +3,8 @@ import { of } from 'rxjs';
 import { Owner } from '../models/owner.model';
 import { Pet, PetType } from '../models/pet.model';
 import {ArrayFirstOrDefaultPipe} from '../extensions/array-first-or-default.pipe';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +20,13 @@ export class OwnerService {
     { id:3,firstName:"Roy",lastName: null,pets: [this.pet4]}
   ];
  
-  constructor(private arrFirstOrDefault: ArrayFirstOrDefaultPipe) { }
+  constructor(private arrFirstOrDefault: ArrayFirstOrDefaultPipe, private http: HttpClient) { }
   
   getAll() {
-    return of(this.owners);
+    //return of(this.owners);
+    return this.http
+      .get<Array<Owner>>(`api/owner`)
+      .pipe(map(resp => resp));
   }
 
   getById(id:number) {
