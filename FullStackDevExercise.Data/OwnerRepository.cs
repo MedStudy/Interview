@@ -17,7 +17,8 @@ namespace FullStackDevExercise.Data
 
     public Owner GetById(int id)
     {
-      return context.Owners.Find(id);
+      return context.Owners.Include(c => c.Pets)
+        .Where(c=>c.id==id).FirstOrDefault();
     }
 
     public IQueryable<Owner> GetAll()
@@ -32,6 +33,13 @@ namespace FullStackDevExercise.Data
       context.Owners.Add(owner);
       return context.SaveChanges();
     }
+
+    public int SavePet(Pet entity)
+    {
+      context.Pets.Attach(entity);
+      return context.SaveChanges();
+    }
+
 
     public int Delete(int id)
     {

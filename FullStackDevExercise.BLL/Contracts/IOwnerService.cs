@@ -7,7 +7,8 @@ namespace FullStackDevExercise.Services.Contracts
   {
     List<OwnerDTO> GetAll();
     OwnerDTO GetById(int Id);
-    int Save(OwnerDTO OwnerDTO);
+    List<OwnerDTO> Save(OwnerDTO OwnerDTO);
     void Delete(int Id);
+    List<PetDTO> SavePet(PetDTO petDTO);
   }
 }

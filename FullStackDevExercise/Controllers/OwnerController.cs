@@ -2,7 +2,7 @@ using FullStackDevExercise.Models;
 using FullStackDevExercise.Services.Contracts;
 using FullStackDevExercise.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Collections.Generic;
 
 namespace FullStackDevExercise.Controllers
 {
@@ -35,9 +35,18 @@ namespace FullStackDevExercise.Controllers
     //Not following a 3 layered architecture here.
     //using DTO itself as there is no change in properties else a different view modal class is preferred.
     [HttpPost]
-    public int Post(OwnerDTO OwnerDTO)
+    public IActionResult Post(OwnerDTO OwnerDTO)
     {
-      return ownerService.Save(OwnerDTO);
+      List<OwnerDTO> result = ownerService.Save(OwnerDTO);
+      return Ok(result);
+    }
+
+    [HttpPost]
+    [Route("pet")]
+    public IActionResult Post(PetDTO PetDTO)
+    {
+      List<PetDTO> result = ownerService.SavePet(PetDTO);
+      return Ok(result);
     }
 
     //// PUT api/<OwnerController>/5

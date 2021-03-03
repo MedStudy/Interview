@@ -12,5 +12,7 @@ namespace FullStackDevExercise.Data
     IQueryable<Owner> GetAll();
     int Save(Owner owner);
     int Delete(int id);
+    int SavePet(Pet entity);
+    //IQueryable<Pet> GetAllPets();
   }
 }

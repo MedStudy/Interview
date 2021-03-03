@@ -1,7 +1,17 @@
-<div class="cell" [ngClass]="hourSlot.slotStatus" (click)="disableCellClick?$event.stopPropagation():notifySlotSelected.emit(slotId)" style="cursor: pointer;"> 
+
+<div class="cell" [ngClass]="hourSlot.slotStatus" (click)="onCellClick()" style="cursor: pointer;">
   {{hourSlot.timeText}}
   <span *ngIf="slotId==hourSlot.appointment?.slotFrom" style="font-weight: bold;">
-    {{hourSlot.appointment?.owner?.firstName}},<i style="font-weight: normal"> Pet: {{hourSlot.appointment?.pet?.type}} Age:{{hourSlot.appointment?.pet?.age}}</i>
+    <button class="btn btn-xs" (click)="onCancelAppointment()" style="z-index: 10; padding: 0px">
+      <span class="fa fa-trash"></span>
+    </button>
+    <span>
+      {{hourSlot.appointment?.owner?.firstName}},<i style="font-weight: normal">
+  Pet: {{hourSlot.appointment?.pet?.type}} Age:{{hourSlot.appointment?.pet?.age}}
+  {{hourSlot.appointment?.notes}}
+</i>
+    </span>
+    
   </span>
 </div>
 

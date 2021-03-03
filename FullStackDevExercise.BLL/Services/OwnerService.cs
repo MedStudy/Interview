@@ -33,10 +33,26 @@ namespace FullStackDevExercise.Services.Services
       return dtoData;
     }
 
-    public int Save(OwnerDTO OwnerDTO)
+    public List<OwnerDTO> Save(OwnerDTO OwnerDTO)
     {
       var entity = mapper.Map<Owner>(OwnerDTO);
-      return ownerRepository.Save(entity); 
+      if (ownerRepository.Save(entity) > 0)
+      {
+        var data = ownerRepository.GetAll().ToList();
+        return mapper.Map<List<OwnerDTO>>(data);
+      }
+      return null;
+    }
+
+    public List<PetDTO> SavePet(PetDTO PetDTO)
+    {
+      var entity = mapper.Map<Pet>(PetDTO);
+      if (ownerRepository.SavePet(entity) > 0)
+      {
+        var data = ownerRepository.GetById(PetDTO.OwnerId);
+        return mapper.Map<List<PetDTO>>(data.Pets);
+      }
+      return null;
     }
 
     public void Delete(int Id)

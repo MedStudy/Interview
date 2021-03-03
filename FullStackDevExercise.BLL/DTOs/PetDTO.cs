@@ -7,7 +7,6 @@ namespace FullStackDevExercise.Services.DTOs
 {
   public class PetDTO : BaseDTO
   {
-    [Required]
     public int OwnerId { get; set; }
     [Required]
     public string Type { get; set; }

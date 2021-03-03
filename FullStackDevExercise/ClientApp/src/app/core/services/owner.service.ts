@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Owner } from '../models/owner.model';
 import { Pet, PetType } from '../models/pet.model';
 import {ArrayFirstOrDefaultPipe} from '../extensions/array-first-or-default.pipe';
@@ -31,5 +31,17 @@ export class OwnerService {
 
   getById(id:number) {
     return of(this.arrFirstOrDefault.transform(this.owners,id));
+  }
+
+  save(data: Owner): Observable<any> {
+     return this.http
+       .post<any>(`api/owner`, data)
+       .pipe(map(res => res));
+  }
+
+  savePet(data: Pet): Observable<any> {
+    return this.http
+      .post<any>(`api/owner/pet`, data)
+      .pipe(map(res => res));
   }
 }

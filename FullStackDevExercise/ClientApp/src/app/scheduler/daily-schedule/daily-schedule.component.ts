@@ -19,7 +19,7 @@ export class DailyScheduleComponent implements OnInit {
   workingHours: number[] = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   slotNoStart: number;
   slotNoEnd: number;
-  appointments: Array<Appointment>|null;
+  appointments: Array<Appointment> | null;
   slotsPerHourArray: number[] = [0, 1, 2, 3];
   nextBookedSlot: number;
   hourSlots: HourSlot[] = [];
@@ -41,12 +41,6 @@ export class DailyScheduleComponent implements OnInit {
   }
 
   isDisabled = (date: NgbDate, current: { month: number, year: number }) => date.month !== current.month;
-  //TODO Fix
-  // hasAppointments = (date: NgbDate) => {
-  //   let convDate=new Date(date.year, date.month, date.day).toLocaleDateString();
-  //   let dayBookings=this.appointments.filter(c => c.appointmentDate?.toLocaleDateString() == convDate)
-  //   return dayBookings.length>0;
-  // };
 
   populateAppointments() {
     //Get list of appointments and iterate through the hourSlots marking them as "Booked"
@@ -56,6 +50,11 @@ export class DailyScheduleComponent implements OnInit {
         this.appointments = result;
         //let _this=this;
         //TODO Add more comment for implemented logic
+        //Instead of storing the actual time for slots numbers have been used, this has helped in selecting a
+        //range of slots easily in UI.
+        //Example if slotFrom has value 92, 9 is base hour and 2 is the number of slot in an hour, so this translates to
+        //9:30 AM assuming slot interval is 15mins.
+        //Similarly 133 translates to 13 => 1pm , 3*15 => 45mins, 1:45pm would be shown in UI.
         for (var i = 0; i < this.appointments.length; i++) {
           let hs: HourSlot = this.hourSlots.filter(c => c.id == this.appointments[i].slotFrom)[0]
           hs.slotStatus = SlotSatus.Booked;
@@ -70,7 +69,6 @@ export class DailyScheduleComponent implements OnInit {
           }
         }
       }
-      console.log(this.hourSlots);
     });
   }
 
@@ -85,6 +83,7 @@ export class DailyScheduleComponent implements OnInit {
   }
 
   initHourSlots() {
+    this.hourSlots = [];
     //represent in 24hr timing for easy mathematical calculations
     for (var h = 9; h <= 17; h++) {
       for (var s = 0; s < this.utilService.slotsPerHour; s++) {
@@ -140,7 +139,6 @@ export class DailyScheduleComponent implements OnInit {
 
     let hs2: HourSlot = this.hourSlots.filter(c => c.id == slotNo)[0];
     hs2.slotStatus = SlotSatus.Booking;
-    //console.log(this.hourSlots);
     //TODO UnitTest logic
     if (this.slotNoEnd == null)
       this.slotNoEnd = this.slotNoStart;
@@ -162,20 +160,13 @@ export class DailyScheduleComponent implements OnInit {
 
   }
 
-  onAppointmentBooked(msg) {
+  refreshAppointmentsList(initHourSlots: any) {
+    if (initHourSlots)
+      this.initHourSlots();
     this.populateAppointments();
     //Clear selected slot range
     this.slotNoStart = null;
     this.slotNoEnd = null;
-  }
-
-  open(slotNumber) {
-    //this.mapTest.set("9.0", slotNumber)
-    // if (!this.selectSlotStart)
-    //   this.selectSlotStart = slotNumber;
-    // else
-    //   this.selectSlotEnd = slotNumber;
-    alert(slotNumber);
   }
 
   onDateSelect($event) {
@@ -185,25 +176,6 @@ export class DailyScheduleComponent implements OnInit {
     this.hourSlots.forEach(c => { c.slotStatus = SlotSatus.None; c.appointment = null })
     this.populateAppointments();
   }
-
-  // open(content) {
-  //   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-
-  // }
-
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return `with: ${reason}`;
-  //   }
-  // }
 
   ngOnDestroy() {
     //this.subscription.unsubscribe();

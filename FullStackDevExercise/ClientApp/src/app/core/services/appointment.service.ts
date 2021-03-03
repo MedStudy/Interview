@@ -42,4 +42,8 @@ export class AppointmentService {
        .post<any>(`api/Appointment`, data)
        .pipe(map(res => res));
   }
+
+  cancelAppointment(id: number): Observable<{}> {
+    return this.http.delete<{}>(`api/Appointment/${id}`);
+  }
 }
