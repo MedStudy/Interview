@@ -1,6 +1,6 @@
 ### Dev Comments
 **Home Page Screenshot**
-![HomePage](/FullStackDevExercise/ScreenShotHomePg.png)
+ScreenShotHomePg.PNG
 
 **To Do**
 - Show Appointments in calendar month view.
