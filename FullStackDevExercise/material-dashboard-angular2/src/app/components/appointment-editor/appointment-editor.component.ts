@@ -23,19 +23,31 @@ export class AppointmentEditorComponent implements OnInit {
   public selectedOwner: any;
   public owners: Array<any>;
   public pets: Array<any>;
+  public times: Array<string>;
+  public vets: Array<any>;
   ngOnInit(): void {
     this.ownerService.getOwners().subscribe(x => {
       this.owners = x;
     });
+    this.times = this.appointmentService.getTimes();
   }
 
   public setPets(event: any) {
     console.log(event);
-    if (this.selectedOwner) {
-      this.petService.getPets().subscribe(x => {
-        this.pets = x.filter(x => x.owner.id === this.selectedOwner.id);
-      });
-    }
+
+    this.petService.getPets().subscribe(x => {
+      this.pets = x.filter(x => x.owner.id === event.value);
+    });
   }
-  public MakeReservation() {}
+  public setVet(event: any) {
+    this.vetService.getVetAvailability('').subscribe(x => {
+      this.vets = x;
+    });
+  }
+  public MakeReservation() {
+    console.log('making appointment');
+    this.appointmentService.saveAppointment(1, 1, 1, '03/10/2021 11:00 am').subscribe(x => {
+      console.log('saved');
+    });
+  }
 }

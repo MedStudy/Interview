@@ -12,6 +12,6 @@ namespace FullStackDevExercise.Requests.Schdules
 
     public long VetId { get; set; }
 
-    public DateTime AppointmentTime { get; set; }
+    public string AppointmentTime { get; set; }
   }
 }

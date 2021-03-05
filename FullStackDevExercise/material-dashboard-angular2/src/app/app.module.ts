@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -42,7 +42,7 @@ import {
     MatTooltipModule,
     HttpClientModule,
     ComponentsModule,
-
+    MatNativeDateModule,
     RouterModule,
     MatFormFieldModule,
     AppRoutingModule,
