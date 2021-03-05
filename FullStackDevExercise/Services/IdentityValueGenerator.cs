@@ -8,7 +8,7 @@ namespace FullStackDevExercise.Services
   public class IdentityValueGenerator : IIdentityValueGenerator
   {
     private static readonly object _syncRoot = new object();
-    public Task<long> WithContext(dolittleContext context, Func<dolittleContext, long> accessor)
+    public Task<long> WithContext(DolittleContext context, Func<DolittleContext, long> accessor)
     {
       long id = 1;
       try

@@ -7,10 +7,10 @@ namespace FullStackDevExercise.Requests.Schdules
 {
   public class CreateScheduleRequest : IRequest<CreateScheduleResponse>
   {
-    public OwnerModel Owner { get; set; }
-    public PetModel Pet { get; set; }
+    public long OwnerId { get; set; }
+    public long PetId { get; set; }
 
-    public VetModel Vet { get; set; }
+    public long VetId { get; set; }
 
     public DateTime AppointmentTime { get; set; }
   }

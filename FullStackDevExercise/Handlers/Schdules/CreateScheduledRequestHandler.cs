@@ -1,12 +1,12 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using FullStackDevExercise.Contracts;
 using FullStackDevExercise.DataAccess;
 using FullStackDevExercise.Models;
 using FullStackDevExercise.Requests.Schdules;
 using FullStackDevExercise.Responses.Schdules;
-using System.Linq;
-using FullStackDevExercise.Contracts;
 
 namespace FullStackDevExercise.Handlers.Schdules
 {
@@ -26,18 +26,17 @@ namespace FullStackDevExercise.Handlers.Schdules
     {
       using (var cxt = GetContext())
       {
-        
         var entity = new Appointments
         {
-          Id =  await _identityValueGenerator.WithContext(cxt, (c) => (from o in c.Appointments select o.Id).Max()),
-          OwnerId = request.Owner.Id,
-          PetId = request.Pet.Id,
+          Id = await _identityValueGenerator.WithContext(cxt, (c) => (from o in c.Appointments select o.Id).Max()),
+          OwnerId = request.OwnerId,
+          PetId = request.PetId,
           ScheduledDate = request.AppointmentTime.ToString(),
-          VetId = request.Vet.Id
+          VetId = request.VetId
         };
         cxt.Appointments.Add(entity);
         await cxt.SaveChangesAsync();
-        return new CreateScheduleResponse(_mapper.Map<AppointmentModel>(entity), 200);
+        return new CreateScheduleResponse(_mapper.Map<AppointmentModel>(await cxt.Appointments.FindAsync(entity.Id)), 200);
       }
     }
   }

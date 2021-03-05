@@ -9,6 +9,6 @@ namespace FullStackDevExercise.Contracts
 {
   public interface IIdentityValueGenerator : ISingletonDependency
   {
-    public Task<long> WithContext(dolittleContext context, Func<dolittleContext, long> accessor);
+    public Task<long> WithContext(DolittleContext context, Func<DolittleContext, long> accessor);
   }
 }

@@ -21,7 +21,10 @@ namespace FullStackDevExercise.Handlers.Owners
     {
       using (var cxt = GetContext())
       {
-        var owner = await cxt.Owners.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.Id);
+        var owner = await cxt.Owners.AsNoTracking()
+            .Include(x=>x.Appointments)
+            .Include(x=>x.Pets)
+            .FirstOrDefaultAsync(x => x.Id == request.Id);
         return new GetOwnerResponse(_mapper.Map<OwnerModel>(owner));
       }
     }

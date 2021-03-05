@@ -20,9 +20,12 @@ namespace FullStackDevExercise.Handlers.Owners
 
     public override async Task<ListOwnersResponse> Handle(ListOwnersRequest request, CancellationToken cancellationToken)
     {
-      using (var cxt = new dolittleContext())
+      using (var cxt = new DolittleContext())
       {
-        var owners = await cxt.Owners.AsNoTracking().ToListAsync();
+        var owners = await cxt.Owners.AsNoTracking()
+          .Include(x=>x.Pets)
+          .Include(x=>x.Appointments)
+          .ToListAsync();
         return new ListOwnersResponse(_mapper.MapList<OwnerModel>(owners));
       }
     }

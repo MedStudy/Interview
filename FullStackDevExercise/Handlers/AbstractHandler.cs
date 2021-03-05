@@ -9,9 +9,9 @@ namespace FullStackDevExercise.Handlers
   {
     public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 
-    protected dolittleContext GetContext()
+    protected DolittleContext GetContext()
     {
-      return new dolittleContext();
+      return new DolittleContext();
     }
   }
 }

@@ -21,7 +21,11 @@ namespace FullStackDevExercise.Handlers.Schdules
     {
       using (var cxt = GetContext())
       {
-        var entities = await cxt.Appointments.ToListAsync();
+        var entities = await cxt.Appointments
+          .AsNoTracking()
+          .Include(x=>x.Owner)
+          .Include(x=>x.Pet)
+          .ToListAsync();
         return new SearchSchedulesResponse(_mapper.MapList<AppointmentModel>(entities));
       }
     }

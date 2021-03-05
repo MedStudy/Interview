@@ -22,7 +22,11 @@ namespace FullStackDevExercise.Handlers.Pets
     {
       using (var cxt = GetContext())
       {
-        var entity = await cxt.Pets.Include(x=>x.Owner).FirstOrDefaultAsync(x=>x.Id==request.Id);
+        var entity = await cxt.Pets
+          .AsNoTracking()
+          .Include(x=>x.Owner)
+          .Include(x=>x.Appointments)
+          .FirstOrDefaultAsync(x=>x.Id==request.Id);
         return new GetPetResponse(_mapper.Map<PetModel>(entity));
       }
     }
