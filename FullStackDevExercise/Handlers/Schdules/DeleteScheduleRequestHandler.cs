@@ -11,9 +11,13 @@ namespace FullStackDevExercise.Handlers.Schdules
     {
       using (var cxt = GetContext())
       {
-        cxt.Appointments.Remove(await cxt.Appointments.FindAsync(request.Id));
-        await cxt.SaveChangesAsync();
-        return new DeleteScheduleResponse();
+        var item = await cxt.Appointments.FindAsync(request.Id);
+        if (item != null)
+        {
+          cxt.Appointments.Remove(item);
+          await cxt.SaveChangesAsync();
+        }
+        return new DeleteScheduleResponse { Success = true };
       }
     }
   }

@@ -1,13 +1,16 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header card-header-danger">
-            <h4 class="card-title ">Owners</h4>
-            <p class="card-category">View a list of current owners</p>
-          </div>
-          <div class="card-body">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h3 class="card-title">Owners</h3>
+        <p class="card-category">
+          Manage Owners
+        </p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="card-title">Current Appointments</h4>
             <div class="table-responsive">
               <table class="table">
                 <thead class=" text-primary">
@@ -20,9 +23,12 @@
                   <th>
                     Last Name
                   </th>
+                  <th>Pets</th>
+                  <th>Appointments</th>
+                  <th></th>
                 </thead>
-                <tbody>
-                  <tr *ngFor="let owner of owners">
+                <tbody *ngFor="let owner of owners">
+                  <tr>
                     <td>
                       {{ owner.id }}
                     </td>
@@ -32,12 +38,30 @@
                     <td>
                       {{ owner.lastName }}
                     </td>
+                    <td>
+                      <span *ngFor="let p of owner.pets"> {{ p.name }}</span
+                      >&nbsp;
+                    </td>
+
+                    <td>
+                      <ul>
+                        <li *ngFor="let p of owner.appointments">
+                          {{ p.scheduledDate }}/ {{ p.vet.name }}
+                        </li>
+                      </ul>
+                    </td>
+                    <td>
+                      <button mat-button type="button" (click)="remove(owner)">
+                        <i class="material-icons">delete_forever</i>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        <div class="col-md-12"></div>
       </div>
     </div>
   </div>

@@ -28,4 +28,7 @@ export class AppointmentsService {
       AppointmentTime: dateTime
     });
   }
+  public removeAppointment(id: number): Observable<any> {
+    return this.http.delete(`/api/schedule/${id}`);
+  }
 }

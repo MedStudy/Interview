@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 import { AppointmentsService } from 'app/services';
 
 @Component({
@@ -13,8 +16,23 @@ export class AppointmentListComponent implements OnInit {
   public isEditing = false;
   public appointments: Array<any>;
   ngOnInit(): void {
-    this.appointmentService.listAppointments().subscribe(x => {
-      this.appointments = x;
+    this.getAppointments().subscribe();
+  }
+  public onSave() {
+    this.getAppointments().subscribe();
+  }
+  public remove(a: any) {
+    console.log('remove', a);
+    this.appointmentService.removeAppointment(a.id).subscribe(x => {
+      this.getAppointments().subscribe();
     });
+  }
+
+  private getAppointments(): Observable<any> {
+    return this.appointmentService.listAppointments().pipe(
+      tap(x => {
+        this.appointments = x;
+      })
+    );
   }
 }

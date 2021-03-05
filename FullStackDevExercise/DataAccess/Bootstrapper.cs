@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.Data.Sqlite;
 
 namespace FullStackDevExercise.DataAccess
@@ -17,18 +19,91 @@ namespace FullStackDevExercise.DataAccess
       CreateVetTable(connection);
       CreateAvailabilityTable(connection);
       CreateAppointmentsTable(connection);
-   
+
     }
 
     public static void SeedData(SqliteConnection connection)
     {
       //insert times.
-      var createTable = connection.CreateCommand();
-      createTable.CommandText = @"
-        insert into vets select 1, 'Dr Doberman';
-        insert into vets select 2, 'Dr Poodle';
-      ";
-      createTable.ExecuteNonQuery();
+      //var createTable = connection.CreateCommand();
+      //createTable.CommandText = @"
+      //  insert into vets select 1, 'Dr Doberman';
+      //  insert into vets select 2, 'Dr Poodle';
+      //";
+      //createTable.ExecuteNonQuery();
+
+
+//      var command = @"
+//insert into owners select 20, 'Noella', 'Sacks';
+//insert into owners select 3, 'Alfreda', 'Kegler';
+//insert into owners select 4, 'Freda', 'Napoleon';
+//insert into owners select 5, 'Cleo', 'Ratledge';
+//insert into owners select 6, 'Deloris', 'Kephart';
+//insert into owners select 7, 'Harrison', 'Holman';
+//insert into owners select 8, 'Gregg', 'Trusty';
+//insert into owners select 9, 'Shavonda', 'Leftwich';
+//insert into owners select 10, 'Shonda', 'Litton';
+//insert into owners select 11, 'Stephane', 'Triana';
+//insert into owners select 12, 'Ying', 'Halstead';
+//insert into owners select 13, 'Kaylee', 'Killingsworth';
+//insert into owners select 14, 'Lisette', 'Nakagawa';
+//insert into owners select 15, 'Marlene', 'Nettles';
+//insert into owners select 16, 'Emerson', 'Petrella';
+//insert into owners select 17, 'Ermelinda', 'Anders';
+//insert into owners select 18, 'Rina', 'Carreira';
+//insert into owners select 19, 'Sari', 'Padua';
+
+
+//";
+//      var createTable =  connection.CreateCommand();
+//      createTable.CommandText = command;
+//      createTable.ExecuteNonQuery();
+
+      var types = new string[] { "cat", "dog" };
+      var names = new string[]
+      {
+        "Sophia",
+"Jimmuy",
+"Nibbles",
+"Domino",
+"Hugo",
+"Mason",
+"Miko",
+"Polly",
+"Harpo",
+"Titus",
+"Giant",
+"Thumper",
+"Tommy",
+"Kerry",
+"Miles",
+"Lou",
+"Smoke",
+"Puddles",
+"Tito",
+"Brandi",
+"Axle",
+"Kallie",
+"Ming",
+"Skinny",
+"Cooper",
+"Franky",
+"Gilda",
+"Niki"
+      };
+
+      var rand = new Random();
+
+     foreach( var item in Enumerable.Range(2, 18))
+      {
+        var name = names[rand.Next(0, names.Length - 1)];
+        var type = types[rand.Next(0, types.Length - 1)];
+
+        var createTable = connection.CreateCommand();
+        createTable.CommandText = $"insert into pets select {item}, {item}, '{type}', '{name}', {rand.Next(1,20)};";
+        createTable.ExecuteNonQuery();
+      }
+
     }
 
     private static void SetupDB(SqliteConnection connection)

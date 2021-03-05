@@ -26,6 +26,7 @@
                   <th>
                     Vet
                   </th>
+                  <th></th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let a of appointments">
@@ -35,6 +36,11 @@
                     <td>{{ a.owner.firstName }} {{ a.owner.lastName }}</td>
                     <td>{{ a.pet.name }} / {{ a.pet.type }}</td>
                     <td>{{ a.vet.name }}</td>
+                    <td>
+                      <button mat-button type="button" (click)="remove(a)">
+                        <i class="material-icons">delete_forever</i>
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -44,7 +50,7 @@
             <button mat-button type="button" class="close" (click)="isEditing = true">
               Add Appointment
             </button>
-            <app-appointment-editor *ngIf="isEditing"></app-appointment-editor>
+            <app-appointment-editor *ngIf="isEditing" (saved)="onSave()"></app-appointment-editor>
           </div>
         </div>
         <div class="col-md-12"></div>

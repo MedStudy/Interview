@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {
   AppointmentsService,
@@ -13,6 +14,9 @@ import {
   styleUrls: ['./appointment-editor.component.css']
 })
 export class AppointmentEditorComponent implements OnInit {
+  @Output()
+  saved = new EventEmitter();
+
   constructor(
     private appointmentService: AppointmentsService,
     private ownerService: OwnersService,
@@ -25,29 +29,78 @@ export class AppointmentEditorComponent implements OnInit {
   public pets: Array<any>;
   public times: Array<string>;
   public vets: Array<any>;
+
+  private owner = new FormControl(Validators.required);
+  private pet = new FormControl(Validators.required);
+  private vet = new FormControl(Validators.required);
+  private date = new FormControl(Validators.required);
+  private time = new FormControl(Validators.required);
+
+  private currentTime: string;
+  private currentDate: string;
+
+  public form: FormGroup = new FormGroup({
+    owner: this.owner,
+    pet: this.pet,
+    vet: this.vet,
+    date: this.date,
+    time: this.time
+  });
+
   ngOnInit(): void {
     this.ownerService.getOwners().subscribe(x => {
       this.owners = x;
     });
     this.times = this.appointmentService.getTimes();
-  }
 
-  public setPets(event: any) {
-    console.log(event);
+    this.date.valueChanges.subscribe(s => {
+      if (s) {
+        this.currentDate = s;
+      } else {
+        this.currentDate = undefined;
+      }
+      this.setAvailability();
+    });
+    this.time.valueChanges.subscribe(s => {
+      if (s) {
+        this.currentTime = s;
+      } else {
+        this.currentTime = undefined;
+      }
+      this.setAvailability();
+    });
 
-    this.petService.getPets().subscribe(x => {
-      this.pets = x.filter(x => x.owner.id === event.value);
+    this.owner.valueChanges.subscribe(o => {
+      this.petService.getPets().subscribe(x => {
+        this.pets = x.filter(x => x.owner.id === o);
+      });
+      this.setAvailability();
+    });
+    this.pet.valueChanges.subscribe(o => {
+      console.log('pet', o);
+      console.log(`${this.currentDate} ${this.currentTime}`);
     });
   }
-  public setVet(event: any) {
-    this.vetService.getVetAvailability('').subscribe(x => {
-      this.vets = x;
-    });
-  }
+
   public MakeReservation() {
-    console.log('making appointment');
-    this.appointmentService.saveAppointment(1, 1, 1, '03/10/2021 11:00 am').subscribe(x => {
-      console.log('saved');
+    if (this.form.valid) {
+      console.log('making appointment');
+      console.log(this.form.getRawValue());
+      const fv = this.form.getRawValue();
+
+      var dt = `${fv.date.getMonth() + 1}/${fv.date.getDate()}/${fv.date.getFullYear()} ${fv.time}`;
+      this.appointmentService.saveAppointment(fv.owner, fv.pet, fv.vet, dt).subscribe(x => {
+        console.log('saved');
+        this.saved.emit(undefined);
+      });
+    }
+  }
+
+  private setAvailability() {
+    this.vetService.getVetAvailability(`${this.currentDate} ${this.currentTime}`).subscribe(x => {
+      this.vets = [];
+      this.vets = x;
+      this.vet.reset();
     });
   }
 }

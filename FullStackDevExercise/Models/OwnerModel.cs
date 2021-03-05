@@ -10,5 +10,9 @@ namespace FullStackDevExercise.Models
     public long Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
+
+    public List<PetModel> Pets { get; set; }
+
+    public List<AppointmentModel> Appointments { get; set; }
   }
 }

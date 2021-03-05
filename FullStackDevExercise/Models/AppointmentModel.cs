@@ -7,5 +7,7 @@ namespace FullStackDevExercise.Models
     public virtual OwnerModel Owner { get; set; }
     public virtual PetModel Pet { get; set; }
     public virtual VetModel Vet { get; set; }
+
+    public long Id { get; set; }
   }
 }

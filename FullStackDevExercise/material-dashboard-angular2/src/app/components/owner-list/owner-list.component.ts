@@ -10,10 +10,13 @@ import { OwnersService } from 'app/services';
 export class OwnerListComponent implements OnInit {
   constructor(private ownerService: OwnersService) {}
   public owners: Array<any>;
+  public isEditing = false;
   ngOnInit(): void {
     this.ownerService.getOwners().subscribe(x => {
       console.log(x);
       this.owners = x;
     });
   }
+  public remove(item: any) {}
+  public onSave() {}
 }

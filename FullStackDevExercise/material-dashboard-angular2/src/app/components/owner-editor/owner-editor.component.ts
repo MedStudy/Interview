@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 import { OwnersService } from 'app/services';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-owner-editor',
@@ -9,6 +10,7 @@ import { OwnersService } from 'app/services';
 })
 export class OwnerEditorComponent implements OnInit {
   constructor(private ownerService: OwnersService) {}
-
+  @Output()
+  saved = new EventEmitter();
   ngOnInit(): void {}
 }
