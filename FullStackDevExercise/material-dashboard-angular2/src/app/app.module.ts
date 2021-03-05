@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,19 +16,17 @@ import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import {
-  AppointmentEditorComponent
-} from './appointment-editor/appointment-editor.component';
-import {
-  AppointmentListComponent
-} from './appointment-list/appointment-list.component';
+  AppointmentEditorComponent,
+  AppointmentListComponent,
+  OwnerEditorComponent,
+  OwnerListComponent,
+  PetEditorComponent,
+  PetListComponent
+} from './components';
 import { ComponentsModule } from './components/components.module';
 import {
   AdminLayoutComponent
 } from './layouts/admin-layout/admin-layout.component';
-import { OwnerEditorComponent } from './owner-editor/owner-editor.component';
-import { OwnerListComponent } from './owner-list/owner-list.component';
-import { PetEditorComponent } from './pet-editor/pet-editor.component';
-import { PetListComponent } from './pet-list/pet-list.component';
 
 @NgModule({
   imports: [
@@ -38,10 +37,12 @@ import { PetListComponent } from './pet-list/pet-list.component';
     MatRippleModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
     MatSelectModule,
     MatTooltipModule,
     HttpClientModule,
     ComponentsModule,
+
     RouterModule,
     MatFormFieldModule,
     AppRoutingModule,

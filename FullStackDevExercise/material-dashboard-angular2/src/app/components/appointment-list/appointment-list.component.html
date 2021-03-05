@@ -44,11 +44,10 @@
             <button mat-button type="button" class="close" (click)="isEditing = true">
               Add Appointment
             </button>
+            <app-appointment-editor *ngIf="isEditing"></app-appointment-editor>
           </div>
         </div>
-        <div class="col-md-12">
-          <app-appointment-editor *ngIf="isEditing"></app-appointment-editor>
-        </div>
+        <div class="col-md-12"></div>
       </div>
     </div>
   </div>

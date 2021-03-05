@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PetsService } from '../pets.service';
+import { PetsService } from 'app/services';
 
 @Component({
   selector: 'app-pet-editor',

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { OwnersService } from 'app/owners.service';
-import { PetsService } from 'app/pets.service';
-
-import { AppointmentsService } from '../appointments.service';
+import {
+  AppointmentsService,
+  OwnersService,
+  PetsService,
+  VetsService
+} from 'app/services';
 
 @Component({
   selector: 'app-appointment-editor',
@@ -14,7 +16,8 @@ export class AppointmentEditorComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentsService,
     private ownerService: OwnersService,
-    private petService: PetsService
+    private petService: PetsService,
+    private vetService: VetsService
   ) {}
 
   public selectedOwner: any;
@@ -34,4 +37,5 @@ export class AppointmentEditorComponent implements OnInit {
       });
     }
   }
+  public MakeReservation() {}
 }

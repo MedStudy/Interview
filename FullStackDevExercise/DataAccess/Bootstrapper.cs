@@ -17,6 +17,7 @@ namespace FullStackDevExercise.DataAccess
       CreateVetTable(connection);
       CreateAvailabilityTable(connection);
       CreateAppointmentsTable(connection);
+   
     }
 
     public static void SeedData(SqliteConnection connection)
@@ -24,7 +25,8 @@ namespace FullStackDevExercise.DataAccess
       //insert times.
       var createTable = connection.CreateCommand();
       createTable.CommandText = @"
-        insert into availability select 1, '9am'
+        insert into vets select 1, 'Dr Doberman';
+        insert into vets select 2, 'Dr Poodle';
       ";
       createTable.ExecuteNonQuery();
     }

@@ -17,9 +17,9 @@ namespace FullStackDevExercise.Controllers
 
     [HttpGet]
     [Produces("application/json")]
-    public async Task<IEnumerable<VetModel>> GetAvailability([FromQuery] DateTime? date)
+    public async Task<IEnumerable<VetModel>> GetAvailability([FromQuery] string dateTime)
     {
-      var vets = await Mediator.Send(new ListVetAvailabilityRequest());
+      var vets = await Mediator.Send(new ListVetAvailabilityRequest(dateTime));
       return vets?.Models ?? Enumerable.Empty<VetModel>();
     }
   }
