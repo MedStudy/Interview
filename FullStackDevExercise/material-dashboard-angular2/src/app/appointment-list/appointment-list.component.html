@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h3 class="card-title">Appointments</h3>
+        <p class="card-category">
+          View and Schedule Appointments
+        </p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="card-title">Current Appointments</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    When
+                  </th>
+                  <th>
+                    Owner
+                  </th>
+                  <th>
+                    Pet
+                  </th>
+                  <th>
+                    Vet
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let a of appointments">
+                    <td>
+                      {{ a.scheduledDate }}
+                    </td>
+                    <td>{{ a.owner.firstName }} {{ a.owner.lastName }}</td>
+                    <td>{{ a.pet.name }} / {{ a.pet.type }}</td>
+                    <td>{{ a.vet.name }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <button mat-button type="button" class="close" (click)="isEditing = true">
+              Add Appointment
+            </button>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <app-appointment-editor *ngIf="isEditing"></app-appointment-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Pets</h4>
+            <p class="card-category">View a list of current pets</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Type
+                  </th>
+                  <th>
+                    Age
+                  </th>
+                  <th>
+                    Owner
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pet of pets">
+                    <td>
+                      {{ pet.id }}
+                    </td>
+                    <td>
+                      {{ pet.name }}
+                    </td>
+                    <td>
+                      {{ pet.type }}
+                    </td>
+                    <td>
+                      {{ pet.age }}
+                    </td>
+                    <td>{{ pet.owner.firstName }} {{ pet.owner.lastName }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
