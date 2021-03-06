@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using FullStackDevExercise.Models;
 using FullStackDevExercise.Responses.Schdules;
 using MediatR;
@@ -12,6 +13,7 @@ namespace FullStackDevExercise.Requests.Schdules
 
     public long VetId { get; set; }
 
+    [Required, MaxLength(50)]
     public string AppointmentTime { get; set; }
   }
 }

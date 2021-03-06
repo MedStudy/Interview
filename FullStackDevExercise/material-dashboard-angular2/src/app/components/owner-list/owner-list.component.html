@@ -25,7 +25,6 @@
                   </th>
                   <th>Pets</th>
                   <th>Appointments</th>
-                  <th></th>
                 </thead>
                 <tbody *ngFor="let owner of owners">
                   <tr>
@@ -49,11 +48,6 @@
                           {{ p.scheduledDate }}/ {{ p.vet.name }}
                         </li>
                       </ul>
-                    </td>
-                    <td>
-                      <button mat-button type="button" (click)="remove(owner)">
-                        <i class="material-icons">delete_forever</i>
-                      </button>
                     </td>
                   </tr>
                 </tbody>

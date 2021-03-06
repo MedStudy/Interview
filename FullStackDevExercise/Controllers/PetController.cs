@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FullStackDevExercise.Models;
 using FullStackDevExercise.Requests.Pets;
+using FullStackDevExercise.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +12,11 @@ namespace FullStackDevExercise.Controllers
 {
   public class PetController : BaseController
   {
-    public PetController(IMediator mediator) : base(mediator)
+    private readonly IMapper _mapper;
+
+    public PetController(IMediator mediator, IMapper mapper) : base(mediator)
     {
+      _mapper = mapper;
     }
 
     [HttpGet]
@@ -40,10 +45,24 @@ namespace FullStackDevExercise.Controllers
 
     [HttpPost]
     [Produces("application/json")]
-    public async Task<PetModel> SavePet([FromBody] PetModel model)
+    public async Task<ObjectResult> SavePet([FromBody] PetViewModel model)
     {
-      var response = await Mediator.Send(new SavePetRequest(model));
-      return response.Model;
+
+
+      if (ModelState.IsValid && model != null)
+      {
+        var petModel = _mapper.Map<PetModel>(model);
+        petModel.Owner = new OwnerModel
+        {
+          Id = model.OwnerId
+        };
+        var response = await Mediator.Send(new SavePetRequest(petModel));
+        return Ok(response.Model);
+      }
+      else
+      {
+        return StatusCode(400, ModelState.Values);
+      }
     }
   }
 }

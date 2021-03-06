@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using FullStackDevExercise.Models;
 using FullStackDevExercise.Requests.Owners;
+using FullStackDevExercise.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +12,11 @@ namespace FullStackDevExercise.Controllers
 {
   public class OwnerController : BaseController
   {
-    public OwnerController(IMediator mediator) : base(mediator)
+    private readonly IMapper _mapper;
+
+    public OwnerController(IMediator mediator, IMapper mapper) : base(mediator)
     {
+      _mapper = mapper;
     }
 
     [HttpGet]
@@ -39,10 +44,17 @@ namespace FullStackDevExercise.Controllers
     }
     [HttpPost]
     [Produces("application/json")]
-    public async Task<OwnerModel> SaveOwner( [FromBody]  OwnerModel model)
+    public async Task<ObjectResult> SaveOwner( [FromBody]  OwnerViewModel model)
     {
-       var response = await Mediator.Send(new SaveOwnerRequest(model));
-      return response?.Model;
+      if (ModelState.IsValid && model != null)
+      {
+        var response = await Mediator.Send(new SaveOwnerRequest(_mapper.Map<OwnerModel>( model) ));
+        return Ok( response?.Model);
+      }
+      else
+      {
+        return StatusCode(400, ModelState.Values);
+      }
     }
   }
 }

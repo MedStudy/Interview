@@ -26,6 +26,7 @@ namespace FullStackDevExercise
       
       services.AddControllers().AddNewtonsoftJson(a =>
       {
+    
         a.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
       });
       // Register the Swagger generator, defining 1 or more Swagger documents
@@ -67,7 +68,7 @@ namespace FullStackDevExercise
       // specifying the Swagger JSON endpoint.
       app.UseSwaggerUI(c =>
       {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FullStackDevExercise");
       });
       app.UseRouting();
 

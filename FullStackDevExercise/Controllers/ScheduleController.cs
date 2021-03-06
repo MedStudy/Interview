@@ -21,8 +21,6 @@ namespace FullStackDevExercise.Controllers
       return schedules.Models;
     }
 
-  
-
     [HttpDelete("{id}")]
     [Produces("application/json")]
     public async Task<ObjectResult> DeleteSchedule([FromRoute] int id)
@@ -33,18 +31,32 @@ namespace FullStackDevExercise.Controllers
 
     [HttpPut]
     [Produces("application/json")]
-    public async Task<AppointmentModel> CreateSchedule([FromBody] CreateScheduleRequest model)
+    public async Task<ObjectResult> CreateSchedule([FromBody] CreateScheduleRequest model)
     {
-      var response = await Mediator.Send(model);
-      return response.Model;
+      if (ModelState.IsValid)
+      {
+        var response = await Mediator.Send(model);
+        return Ok(response?.Model);
+      }
+      else
+      {
+        return StatusCode(400, ModelState.Values);
+      }
     }
 
     [HttpPost]
     [Produces("application/json")]
-    public async Task<AppointmentModel> UpdateSchedule([FromBody] UpdateScheduleRequest model)
+    public async Task<ObjectResult> UpdateSchedule([FromBody] UpdateScheduleRequest model)
     {
-      var response = await Mediator.Send(model);
-      return response?.Model;
+      if (ModelState.IsValid)
+      {
+        var response = await Mediator.Send(model);
+        return Ok(response?.Model);
+      }
+      else
+      {
+        return StatusCode(400, ModelState.Values);
+      }
     }
   }
 }

@@ -36,8 +36,8 @@ export class AppointmentEditorComponent implements OnInit {
   private date = new FormControl(Validators.required);
   private time = new FormControl(Validators.required);
 
-  private currentTime: string;
-  private currentDate: string;
+  private currentTime: any;
+  private currentDate: any;
 
   public form: FormGroup = new FormGroup({
     owner: this.owner,
@@ -89,6 +89,7 @@ export class AppointmentEditorComponent implements OnInit {
       const fv = this.form.getRawValue();
 
       var dt = `${fv.date.getMonth() + 1}/${fv.date.getDate()}/${fv.date.getFullYear()} ${fv.time}`;
+      console.log(dt);
       this.appointmentService.saveAppointment(fv.owner, fv.pet, fv.vet, dt).subscribe(x => {
         console.log('saved');
         this.saved.emit(undefined);
@@ -97,7 +98,9 @@ export class AppointmentEditorComponent implements OnInit {
   }
 
   private setAvailability() {
-    this.vetService.getVetAvailability(`${this.currentDate} ${this.currentTime}`).subscribe(x => {
+    var dt = `${this.currentDate.getMonth() +
+      1}/${this.currentDate.getDate()}/${this.currentDate.getFullYear()} ${this.currentTime}`;
+    this.vetService.getVetAvailability(dt).subscribe(x => {
       this.vets = [];
       this.vets = x;
       this.vet.reset();
