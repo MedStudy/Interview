@@ -1,34 +1,28 @@
-using System;
-using Autofac;
-using Dependous;
-using FullStackDevExercise.DataAccess;
-using MediatR;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using FullStackDevExercise.Contracts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+[assembly: InternalsVisibleTo("IntegrationTests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2, PublicKey=0024000004800000940000000602000000240000525341310004000001000100c547cac37abd99c8db225ef2f6c8a3602f3b3606cc9891605d02baa56104f4cfc0734aa39b93bf7852f7d9266654753cc297e7d2edfe0bac1cdcf9f717241550e0a7b191195b7667bb4f64bcb8e2121380fd1d9d46ad2d92d2d15605093924cceaf74c4861eff62abf69b9291ed0a340e113be11e6a7d3113e92484cf7045cc7")]
 
 namespace FullStackDevExercise
 {
   public class Program
   {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-      Bootstrapper.BootstrapSchema();
-      CreateHostBuilder(args)
-        .UseAutoFacContainer(AssemblyPaths.From("FullStackDevExercise.dll"), containerBuilder: builder =>
-        {
-          builder.RegisterType<Mediator>()
-     .As<IMediator>()
-     .InstancePerLifetimeScope();
+      var builder = CreateHostBuilder(args)
+        .Build();
 
-          // request & notification handlers
-          builder.Register<ServiceFactory>(context =>
-          {
-            var c = context.Resolve<IComponentContext>();
-            return t => c.Resolve(t);
-          });
-        }, logger: (e) => Console.WriteLine($"{e}"))
-        .Build().Run();
+      if (args?.Any() == true)
+      {
+        await builder.Services.GetService<IBootstrapper>().BootstrapWithOptions(args);
+      }
+      builder.Run();
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -42,3 +42,12 @@ We don't expect you to spend weeks doing this, but expect a little back and fort
 - Before you submit, please make sure your app builds and runs. It seems weird to say that, but you'd be surprised how many submissions we get that simply don't run at all.
 
 Good luck, and don't be afraid to reach out to us and ask questions of any kind.
+
+
+### Notes From Jason
+
+to bootstap and seed the app, pass the following at the command line:
+
+```
+bootstrap seed owners pets vets
+```

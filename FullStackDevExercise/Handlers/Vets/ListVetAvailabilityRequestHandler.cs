@@ -22,7 +22,7 @@ namespace FullStackDevExercise.Handlers.Schdules
     {
       using (var cxt = GetContext())
       {
-        var query = (from v in cxt.Vets where !(from a in cxt.Appointments select a.ScheduledDate).Contains(request.Date) select v);
+        var query = (from v in cxt.Vets where !(from a in cxt.Appointments where a.VetId == v.Id  select a.ScheduledDate).Contains(request.Date) select v);
 
         var entities = await query.ToListAsync();
         return new ListVetAvailabilityResponse(_mapper.MapList<VetModel>(entities));
