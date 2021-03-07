@@ -15,9 +15,13 @@ namespace FullStackDevExercise.Handlers.Owners
     {
       using (var cxt = GetContext())
       {
-        cxt.Owners.Remove(await cxt.Owners.FindAsync(request.Id));
+        var item = await cxt.Owners.FindAsync(request.Id);
+        if (item != null)
+        {
+          cxt.Owners.Remove(item);
+        }
         await cxt.SaveChangesAsync();
-        return new RemoveOwnerResponse();
+        return new RemoveOwnerResponse { Success = true };
       }
     }
   }

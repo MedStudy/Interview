@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FullStackDevExercise.Models;
 using FullStackDevExercise.Requests.Schdules;
+using FullStackDevExercise.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +22,6 @@ namespace FullStackDevExercise.Controllers
       return schedules.Models;
     }
 
-  
-
     [HttpDelete("{id}")]
     [Produces("application/json")]
     public async Task<ObjectResult> DeleteSchedule([FromRoute] int id)
@@ -33,18 +32,39 @@ namespace FullStackDevExercise.Controllers
 
     [HttpPut]
     [Produces("application/json")]
-    public async Task<AppointmentModel> CreateSchedule([FromBody] CreateScheduleRequest model)
+    public async Task<ObjectResult> CreateSchedule([FromBody] CreateScheduleRequest model)
     {
-      var response = await Mediator.Send(model);
-      return response.Model;
+      if (ModelState.IsValid)
+      {
+        var response = await Mediator.Send(model);
+        if (response.Status == 200)
+        {
+          return Ok(new AppointmentViewModel(response?.Model));
+        }
+        else
+        {
+          return StatusCode(response.Status, new AppointmentViewModel(model, ModelState, response.Message));
+        }
+      }
+      else
+      {
+        return StatusCode(400, new AppointmentViewModel(model, ModelState));
+      }
     }
 
     [HttpPost]
     [Produces("application/json")]
-    public async Task<AppointmentModel> UpdateSchedule([FromBody] UpdateScheduleRequest model)
+    public async Task<ObjectResult> UpdateSchedule([FromBody] UpdateScheduleRequest model)
     {
-      var response = await Mediator.Send(model);
-      return response?.Model;
+      if (ModelState.IsValid)
+      {
+        var response = await Mediator.Send(model);
+        return Ok(response?.Model);
+      }
+      else
+      {
+        return StatusCode(400, ModelState.Values);
+      }
     }
   }
 }

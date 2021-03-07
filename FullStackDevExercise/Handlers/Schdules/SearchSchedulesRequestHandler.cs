@@ -25,6 +25,7 @@ namespace FullStackDevExercise.Handlers.Schdules
           .AsNoTracking()
           .Include(x=>x.Owner)
           .Include(x=>x.Pet)
+          .Include(x=>x.Vet)
           .ToListAsync();
         return new SearchSchedulesResponse(_mapper.MapList<AppointmentModel>(entities));
       }

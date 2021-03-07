@@ -15,9 +15,13 @@ namespace FullStackDevExercise.Handlers.Pets
     {
       using (var cxt = GetContext())
       {
-        cxt.Pets.Remove(await cxt.Pets.FindAsync(request.Id));
+        var item = await cxt.Pets.FindAsync(request.Id);
+        if (item != null)
+        {
+          cxt.Pets.Remove(item);
+        }
         await cxt.SaveChangesAsync();
-        return new RemovePetResponse();
+        return new RemovePetResponse { Success = true };
       }
     }
   }

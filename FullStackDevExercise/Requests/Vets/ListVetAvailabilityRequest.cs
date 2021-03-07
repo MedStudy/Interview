@@ -11,6 +11,10 @@ namespace FullStackDevExercise.Requests.Vets
   /// </summary>
   public class ListVetAvailabilityRequest : IRequest<ListVetAvailabilityResponse>
   {
-    public DateTime Date { get; set; }
+    public ListVetAvailabilityRequest(string date)
+    {
+      Date = date;
+    }
+    public string Date { get; set; }
   }
 }

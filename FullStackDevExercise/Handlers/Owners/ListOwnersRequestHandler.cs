@@ -24,7 +24,7 @@ namespace FullStackDevExercise.Handlers.Owners
       {
         var owners = await cxt.Owners.AsNoTracking()
           .Include(x=>x.Pets)
-          .Include(x=>x.Appointments)
+          .Include(x=>x.Appointments).ThenInclude(y=>y.Vet)
           .ToListAsync();
         return new ListOwnersResponse(_mapper.MapList<OwnerModel>(owners));
       }

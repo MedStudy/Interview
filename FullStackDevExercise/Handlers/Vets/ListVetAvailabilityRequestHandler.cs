@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -21,7 +22,9 @@ namespace FullStackDevExercise.Handlers.Schdules
     {
       using (var cxt = GetContext())
       {
-        var entities = await cxt.Vets.ToListAsync();
+        var query = (from v in cxt.Vets where !(from a in cxt.Appointments where a.VetId == v.Id  select a.ScheduledDate).Contains(request.Date) select v);
+
+        var entities = await query.ToListAsync();
         return new ListVetAvailabilityResponse(_mapper.MapList<VetModel>(entities));
       }
     }

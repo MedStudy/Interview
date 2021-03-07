@@ -1,5 +1,4 @@
 using AutoMapper;
-using Dependous;
 using FullStackDevExercise.Profiles;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -23,16 +22,19 @@ namespace FullStackDevExercise
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddControllers();
+      services.AddControllers().AddNewtonsoftJson(a =>
+      {
+        a.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+      });
       // Register the Swagger generator, defining 1 or more Swagger documents
       services.AddSwaggerGen();
       services.AddMediatR(typeof(Startup));
-      services.AddDependencyScanning()
-            .AddAutoMapper(typeof(AutoMapperProfile));
+      services.RegisterApplicationDependencies();
+      services.AddAutoMapper(typeof(AutoMapperProfile));
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
       {
-        configuration.RootPath = "ClientApp/dist";
+        configuration.RootPath = "material-dashboard-angular2/dist";
       });
     }
 
@@ -63,7 +65,7 @@ namespace FullStackDevExercise
       // specifying the Swagger JSON endpoint.
       app.UseSwaggerUI(c =>
       {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FullStackDevExercise");
       });
       app.UseRouting();
 
@@ -74,10 +76,10 @@ namespace FullStackDevExercise
 
       app.UseSpa(spa =>
       {
-              // To learn more about options for serving an Angular SPA from ASP.NET Core,
-              // see https://go.microsoft.com/fwlink/?linkid=864501
+        // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
 
-              spa.Options.SourcePath = "ClientApp";
+        spa.Options.SourcePath = "material-dashboard-angular2";
 
         if (env.IsDevelopment())
         {
