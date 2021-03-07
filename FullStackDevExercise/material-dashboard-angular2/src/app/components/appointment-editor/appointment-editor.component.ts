@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { combineLatest, Observable } from 'rxjs';
+
 import {
   AppointmentsService,
   OwnersService,
@@ -29,12 +31,17 @@ export class AppointmentEditorComponent implements OnInit {
   public pets: Array<any>;
   public times: Array<string>;
   public vets: Array<any>;
+  public isError = false;
+  public errors: Array<string>;
 
-  private owner = new FormControl(Validators.required);
-  private pet = new FormControl(Validators.required);
-  private vet = new FormControl(Validators.required);
-  private date = new FormControl(Validators.required);
-  private time = new FormControl(Validators.required);
+  public owners$: Observable<any>;
+  public datetime$: Observable<any>;
+
+  private owner = new FormControl(undefined, Validators.required);
+  private pet = new FormControl(undefined, Validators.required);
+  private vet = new FormControl(undefined, Validators.required);
+  private date = new FormControl(undefined, Validators.required);
+  private time = new FormControl(undefined, Validators.required);
 
   private currentTime: any;
   private currentDate: any;
@@ -48,26 +55,15 @@ export class AppointmentEditorComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.ownerService.getOwners().subscribe(x => {
-      this.owners = x;
-    });
+    this.owners$ = this.ownerService.getOwners();
     this.times = this.appointmentService.getTimes();
-
-    this.date.valueChanges.subscribe(s => {
-      if (s) {
-        this.currentDate = s;
-      } else {
-        this.currentDate = undefined;
+    this.datetime$ = combineLatest(this.date.valueChanges, this.time.valueChanges);
+    this.datetime$.subscribe(x => {
+      if (x.length === 2) {
+        this.currentDate = x[0];
+        this.currentTime = x[1];
+        this.setAvailability();
       }
-      this.setAvailability();
-    });
-    this.time.valueChanges.subscribe(s => {
-      if (s) {
-        this.currentTime = s;
-      } else {
-        this.currentTime = undefined;
-      }
-      this.setAvailability();
     });
 
     this.owner.valueChanges.subscribe(o => {
@@ -89,11 +85,29 @@ export class AppointmentEditorComponent implements OnInit {
       const fv = this.form.getRawValue();
 
       var dt = `${fv.date.getMonth() + 1}/${fv.date.getDate()}/${fv.date.getFullYear()} ${fv.time}`;
-      console.log(dt);
-      this.appointmentService.saveAppointment(fv.owner, fv.pet, fv.vet, dt).subscribe(x => {
-        console.log('saved');
-        this.saved.emit(undefined);
-      });
+
+      this.appointmentService.saveAppointment(fv.owner, fv.pet, fv.vet, dt).subscribe(
+        x => {
+          console.log('saved');
+          this.saved.emit(undefined);
+          if (x.status !== 200) {
+            this.isError = true;
+            this.errors = x.errorMessages;
+          } else {
+            this.isError = false;
+            this.errors = [];
+            this.form.reset();
+          }
+        },
+        e => {
+          console.log('error', e);
+          this.isError = true;
+          if (e.error.errorMessages) {
+            this.isError = true;
+            this.errors = e.error.errorMessages;
+          }
+        }
+      );
     }
   }
 

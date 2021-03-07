@@ -1,5 +1,25 @@
 # Full Stack Developer/Engineer Coding Exercise
 
+### Notes From Jason
+
+I enjoyed working on this test very much.  I chose to use a CQRS pattern for all my backend processing.   The Mediatr package from Jimmy Bogard is very simple and powerful library for this.
+
+I also chose not to redesign the provided sqllite tables by adding an identity column.  I instead implemented a rudimentary identity value generator. 
+
+Since most of the logic within this app resides within the EF core db context, I chose to write integration tests rather than unit tests.  I could have used the EF core in -memory db but the integration tests
+just felt better.
+
+to bootstap and seed the app, pass the following at the command line:
+
+```
+bootstrap seed owners pets vets
+```
+
+I also noticed that after clearing out node_modules folder, at times Kestrel timed-out when communicating with the angular server.  When this occurred,
+I simply ran `npm install` followed by 'npm start', killed express and than hit F5 in visual studio._
+
+ I  prefer to over document my code but in the interest of time, when I felt something was not obiviously clear, I provided source code comments. 
+
 ## Getting Started
 
 ### Prerequisites
@@ -44,10 +64,4 @@ We don't expect you to spend weeks doing this, but expect a little back and fort
 Good luck, and don't be afraid to reach out to us and ask questions of any kind.
 
 
-### Notes From Jason
 
-to bootstap and seed the app, pass the following at the command line:
-
-```
-bootstrap seed owners pets vets
-```

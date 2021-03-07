@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using FullStackDevExercise.Models;
 using FullStackDevExercise.Requests.Schdules;
+using FullStackDevExercise.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,11 +37,18 @@ namespace FullStackDevExercise.Controllers
       if (ModelState.IsValid)
       {
         var response = await Mediator.Send(model);
-        return Ok(response?.Model);
+        if (response.Status == 200)
+        {
+          return Ok(new AppointmentViewModel(response?.Model));
+        }
+        else
+        {
+          return StatusCode(response.Status, new AppointmentViewModel(model, ModelState, response.Message));
+        }
       }
       else
       {
-        return StatusCode(400, ModelState.Values);
+        return StatusCode(400, new AppointmentViewModel(model, ModelState));
       }
     }
 

@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace IntegrationTests
+namespace IntegrationTests  
 {
   public class FullStackDevExerciseTests : IClassFixture<CustomWebApplicationFactory<FullStackDevExercise.Startup>>
   {
