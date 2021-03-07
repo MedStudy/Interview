@@ -2,7 +2,7 @@
 
 ### Notes From Jason
 
-I enjoyed working on this test very much.  I chose to use a CQRS pattern for all my backend processing.   The Mediatr package from Jimmy Bogard is very simple and powerful library for this.
+I enjoyed working on this test very much.  I chose to use a CQRS pattern for all my backend processing.   The Mediatr package from Jimmy Bogard is a very simple and powerful library for this.
 
 I also chose not to redesign the provided sqllite tables by adding an identity column.  I instead implemented a rudimentary identity value generator. 
 
