@@ -1,0 +1,36 @@
+<div class="submit-form">
+
+    <div *ngIf="!submitted">
+        <h3>Edit Pet</h3>
+        <div class="form-group">
+            <label for="owner_id">Owner</label>
+            <select class="form-control" id="owner_id" required [(ngModel)]="_petsModel.owner_id" name="owner_id">
+                <option value="-1">Select</option>
+                <option *ngFor="let d of _ownersmodel" [value]="d.id">{{d.first_name}}</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <input class="form-control" id="type" required [(ngModel)]="_petsModel.type" name="type" />
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" id="type" required [(ngModel)]="_petsModel.name" name="name" />
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input class="form-control" id="age" required [(ngModel)]="_petsModel.age" name="age" />
+        </div>
+
+        <button (click)="editpet()" class="btn btn-success">Update Pet</button>
+    </div>
+
+    <div *ngIf="submitted">
+        <h4>Pet updated successfully !!</h4>
+        <button class="btn btn-success" (click)="viewlist()">Show All Pets</button>
+    </div>
+</div>

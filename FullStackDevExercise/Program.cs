@@ -28,28 +28,28 @@ namespace FullStackDevExercise
       var createTable = connection.CreateCommand();
       createTable.CommandText = @"  PRAGMA foreign_keys = ON;";
     }
-
+    //drop table IF EXISTS owners;
     private static void CreateOwnersTable(SqliteConnection connection)
     {
       var createTable = connection.CreateCommand();
       createTable.CommandText = @"
         CREATE TABLE IF NOT EXISTS owners
         (
-          id INTEGER PRIMARY KEY
+          id INTEGER PRIMARY KEY AUTOINCREMENT
           , first_name VARCHAR(50) NOT NULL
           , last_name VARCHAR(50) NOT NULL
         )
       ";
       createTable.ExecuteNonQuery();
     }
-
+    //drop table IF exists pets;
     private static void CreatePetsTable(SqliteConnection connection)
     {
       var createTable = connection.CreateCommand();
       createTable.CommandText = @"
         CREATE TABLE IF NOT EXISTS pets
         (
-          id INTEGER PRIMARY KEY
+          id INTEGER PRIMARY KEY AUTOINCREMENT
           , owner_id INT NOT NULL
           , type VARCHAR(50) NOT NULL
           , name VARCHAR(50) NOT NULL
