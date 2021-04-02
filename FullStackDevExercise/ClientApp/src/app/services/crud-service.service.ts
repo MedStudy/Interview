@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 const owner_baseUrl = 'https://localhost:44397/api/owners';
 const pet_baseUrl = 'https://localhost:44397/api/pets';
+const appointment_baseUrl = 'https://localhost:44397/api/appointments';
 
 @Injectable({
   providedIn: 'root',
@@ -27,22 +28,19 @@ export class CrudServiceService {
   }
 
   getappointments() {
-    return this.http.get(owner_baseUrl + '/appointments');
+    return this.http.get(appointment_baseUrl + '/getAll');
   }
   getparticularappointments(id) {
-    return this.http.get(owner_baseUrl + '/appointments/' + id);
+    return this.http.get(appointment_baseUrl + '/get/' + id);
   }
   createappointment(appointmentData) {
-    return this.http.post(owner_baseUrl + '/appointments', appointmentData);
+    return this.http.post(appointment_baseUrl + '/create', appointmentData);
   }
-  updateappointment(id, appointmentData) {
-    return this.http.put(
-      owner_baseUrl + '/appointments/' + id,
-      appointmentData
-    );
+  updateappointment(appointmentData) {
+    return this.http.put(appointment_baseUrl + '/update', appointmentData);
   }
   deleteparticularappointments(id) {
-    return this.http.delete(owner_baseUrl + '/pets/' + id);
+    return this.http.delete(appointment_baseUrl + '/delete/' + id);
   }
 
   getpets() {

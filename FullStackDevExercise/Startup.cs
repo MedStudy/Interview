@@ -34,6 +34,7 @@ namespace FullStackDevExercise
       
       services.AddSingleton<Iowner, owners>();
       services.AddSingleton<Ipets, Pets>();
+      services.AddSingleton<Iappointment, appointments>();
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
       {

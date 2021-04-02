@@ -22,7 +22,7 @@ const routes: Routes = [
 
   { path: 'appointments', component: AppointmentListComponent },
   { path: 'appointments/add', component: AddAppointmentComponent },
-  { path: 'appointment/:id', component: AppointmentDetailComponent },
+  { path: 'appointmentedit/:id', component: AppointmentDetailComponent },
 
   { path: '**', component: PetListComponent },
 ];

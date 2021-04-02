@@ -11,7 +11,7 @@ import { AddAppointmentComponent } from './appointment/add-appointment/add-appoi
 import { AppointmentDetailComponent } from './appointment/appointment-detail/appointment-detail.component';
 import { AppointmentListComponent } from './appointment/appointment-list/appointment-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { EditownerComponent } from './owner/editowner/editowner.component';
 import { EditpetComponent } from './pet/editpet/editpet.component';
 
@@ -32,7 +32,8 @@ import { EditpetComponent } from './pet/editpet/editpet.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
