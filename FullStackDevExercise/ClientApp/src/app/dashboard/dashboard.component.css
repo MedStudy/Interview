@@ -1,0 +1,19 @@
+.card {
+    height: 350px !important;
+    width: 18rem !important;
+    cursor: pointer;
+}
+
+.card:hover {
+    background-color: floralwhite;
+    border-radius: 40px;
+}
+
+.card-img-top {
+    height: 270px !important;
+    width: 18rem !important;
+}
+
+.card-title {
+    text-align: center;
+}

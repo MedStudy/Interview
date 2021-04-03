@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddAppointmentComponent } from './appointment/add-appointment/add-appointment.component';
 import { AppointmentDetailComponent } from './appointment/appointment-detail/appointment-detail.component';
 import { AppointmentListComponent } from './appointment/appointment-list/appointment-list.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddOwnerComponent } from './owner/add-owner/add-owner.component';
 import { EditownerComponent } from './owner/editowner/editowner.component';
 import { OwnerListComponent } from './owner/owner-list/owner-list.component';
@@ -11,7 +12,10 @@ import { EditpetComponent } from './pet/editpet/editpet.component';
 import { PetListComponent } from './pet/pet-list/pet-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'owners', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  { path: 'home', component: DashboardComponent },
+
   { path: 'owners', component: OwnerListComponent },
   { path: 'owners/add', component: AddOwnerComponent },
   { path: 'owneredit/:id', component: EditownerComponent },
@@ -24,7 +28,7 @@ const routes: Routes = [
   { path: 'appointments/add', component: AddAppointmentComponent },
   { path: 'appointmentedit/:id', component: AppointmentDetailComponent },
 
-  { path: '**', component: PetListComponent },
+  { path: '**', component: DashboardComponent },
 ];
 
 @NgModule({

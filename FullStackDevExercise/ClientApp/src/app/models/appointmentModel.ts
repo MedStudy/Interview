@@ -1,15 +1,17 @@
 export class appointmentModel {
+  id:number;
   owner_id: number;
   pet_id: number;
   date: string;
   fromtime: number;
   totime: number;
   constructor() {
-    this.owner_id = -1;
-    this.pet_id = -1;
+    this.id=0;
+    this.owner_id = 0;
+    this.pet_id = 0;
     this.date = new Date().toISOString().slice(0, 10);
-    this.fromtime = -1;
-    this.totime = -1;
+    this.fromtime = 0;
+    this.totime = 0;
   }
 }
 

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { EditownerComponent } from './owner/editowner/editowner.component';
 import { EditpetComponent } from './pet/editpet/editpet.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EditpetComponent } from './pet/editpet/editpet.component';
     AppointmentDetailComponent,
     AppointmentListComponent,
     EditownerComponent,
-    EditpetComponent
+    EditpetComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

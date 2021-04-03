@@ -1,29 +1,78 @@
 <div class="submit-form">
 
-    <div *ngIf="!submitted">
+    <div *ngIf="!submitted" [formGroup]="_petsModel">
         <h3>Edit Pet</h3>
         <div class="form-group">
             <label for="owner_id">Owner</label>
-            <select class="form-control" id="owner_id" required [(ngModel)]="_petsModel.owner_id" name="owner_id">
-                <option value="-1">Select</option>
-                <option *ngFor="let d of _ownersmodel" [value]="d.id">{{d.first_name}}</option>
-            </select>
-
+            <select class="form-control" id="owner_id" required formControlName="owner_id">
+        <option value="0">Select</option>
+        <option *ngFor="let d of _ownersmodel" [value]="d.id">
+          {{ d.first_name }} {{d.last_name}}
+        </option>
+      </select>
+            <span class="text-danger" *ngIf="
+      _petsModel.get('owner_id').touched &&
+      (_petsModel.get('owner_id').errors?.required || _petsModel.get('owner_id').errors?.checkcustomrequired)
+    ">
+    Required
+  </span>
         </div>
 
         <div class="form-group">
             <label for="type">Type</label>
-            <input class="form-control" id="type" required [(ngModel)]="_petsModel.type" name="type" />
+            <input class="form-control" maxlength="50" id="type" required formControlName="type" />
+            <span class="text-danger" *ngIf="
+          _petsModel.get('type').touched &&
+          _petsModel.get('type').errors?.required
+        ">
+        Required
+      </span>
+            <span class="text-danger" *ngIf="
+          _petsModel.get('type')?.touched &&
+          _petsModel.get('type').errors?.maxlength
+        ">
+        Max length allowed is 50
+      </span>
         </div>
 
         <div class="form-group">
             <label for="name">Name</label>
-            <input class="form-control" id="type" required [(ngModel)]="_petsModel.name" name="name" />
+            <input maxlength="50" class="form-control" id="name" required formControlName="name" />
+            <span class="text-danger" *ngIf="
+          _petsModel.get('name').touched &&
+          _petsModel.get('name').errors?.required
+        ">
+        Required
+      </span>
+            <span class="text-danger" *ngIf="
+          _petsModel.get('name')?.touched &&
+          _petsModel.get('name').errors?.maxlength
+        ">
+        Max length allowed is 50
+      </span>
         </div>
 
         <div class="form-group">
             <label for="age">Age</label>
-            <input class="form-control" id="age" required [(ngModel)]="_petsModel.age" name="age" />
+            <input type="number" maxlength="3" class="form-control" id="age" required formControlName="age" />
+            <span class="text-danger" *ngIf="
+          _petsModel.get('age').touched &&
+          _petsModel.get('age').errors?.required
+        ">
+        Required
+      </span>
+            <span class="text-danger" *ngIf="
+      _petsModel.get('age')?.touched &&
+      _petsModel.get('age').errors?.max
+    ">
+    Max age allowed is 99
+  </span>
+            <span class="text-danger" *ngIf="
+  _petsModel.get('age')?.touched &&
+  _petsModel.get('age').errors?.min
+">
+Age cannot be 0
+</span>
         </div>
 
         <button (click)="editpet()" class="btn btn-success">Update Pet</button>

@@ -1,20 +1,22 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <a href="#" class="navbar-brand">MEd Study</a>
-        <div class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a routerLink="owners" class="nav-link">Owners</a>
-            </li>
-            <li class="nav-item">
-                <a routerLink="pets" class="nav-link">Pets</a>
-            </li>
-            <li class="nav-item">
-                <a routerLink="appointments" class="nav-link">Appointments</a>
-            </li>
-        </div>
-    </nav>
-
-    <div class="container mt-3">
-        <router-outlet></router-outlet>
+        <a routerLink="home" title="View Dashboard" routerLinkActive="active" class="navbar-brand">Dr. Dolittle's Clinic</a
+    >
+    <div class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a title="View Owners" routerLink="owners" class="nav-link">Owners</a>
+        </li>
+        <li class="nav-item">
+            <a title="View Pets" routerLink="pets" routerLinkActive="active" class="nav-link">Pets</a>
+        </li>
+        <li class="nav-item">
+            <a title="View Appointments" routerLink="appointments" routerLinkActive="active" class="nav-link">Appointments</a
+        >
+      </li>
     </div>
+  </nav>
+
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
 </div>

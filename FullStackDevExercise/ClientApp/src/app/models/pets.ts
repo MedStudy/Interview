@@ -1,11 +1,13 @@
 export class petsModel{
+    id: number
     owner_id: number
     type: string 
     name: string
     age : number
     constructor()
     {
-        this.owner_id=-1;
+        this.id=0;
+        this.owner_id=0;
         this.type=''
         this.name=''
         this.age=0

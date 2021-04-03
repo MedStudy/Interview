@@ -1,58 +1,97 @@
 <div class="submit-form">
-    <div *ngIf="!submitted">
+    <div *ngIf="!submitted" [formGroup]="_appointmentModel">
         <h3>Appointment Registration</h3>
         <div class="form-group">
             <label for="owner_id">Owner</label>
-            <select class="form-control" id="owner_id" required #owner_idcontrol="ngModel" [(ngModel)]="_appointmentModel.owner_id" name="owner_id">
-        <option value="-1">Select</option>
+            <select (change)="filterpets()" class="form-control" id="owner_id" required formControlName="owner_id">
+        <option value="0">Select</option>
         <option *ngFor="let d of _ownersmodel" [value]="d.id">
-          {{ d.first_name }}
+          {{ d.first_name }} {{ d.last_name }}
         </option>
       </select>
-            <span class="help-block text-danger" *ngIf="owner_idcontrol.invalid && owner_idcontrol.touched">Help</span>
+            <span class="text-danger" *ngIf="
+          _appointmentModel.get('owner_id').touched &&
+          (_appointmentModel.get('owner_id').errors?.required ||
+            _appointmentModel.get('owner_id').errors?.checkcustomrequired)
+        ">
+        Required
+      </span>
         </div>
         <div class="form-group">
             <label for="owner_id">Pet</label>
-            <select class="form-control" id="pet_id" required [(ngModel)]="_appointmentModel.pet_id" name="pet_id">
-        <option value="-1">Select</option>
+            <select class="form-control" id="pet_id" required formControlName="pet_id">
+        <option value="0">Select</option>
         <option *ngFor="let d of _petsmodel" [value]="d.id">
           {{ d.name }}
         </option>
       </select>
+            <span class="text-danger" *ngIf="
+          _appointmentModel.get('pet_id').touched &&
+          (_appointmentModel.get('pet_id').errors?.required ||
+            _appointmentModel.get('pet_id').errors?.checkcustomrequired)
+        ">
+        Required
+      </span>
         </div>
 
         <div class="form-group">
             <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" required [(ngModel)]="_appointmentModel.date" name="date" />
+            <input type="date" class="form-control" id="date" required formControlName="date" />
+            <span class="text-danger" *ngIf="
+          _appointmentModel.get('date').touched &&
+          _appointmentModel.get('date').errors?.required
+        ">
+        Required
+      </span>
         </div>
         <div class="row">
             <div class="col">
                 <label for="owner_id">From</label>
-                <select (change)="changefrom()" class="form-control" id="fromtime" required [(ngModel)]="_appointmentModel.fromtime" name="fromtime">
-          <option value="-1">Select</option>
+                <select (change)="changefrom()" class="form-control" id="fromtime" required formControlName="fromtime">
+          <option value="0">Select</option>
           <option *ngFor="let d of timearrayfrom" [value]="d.value">
             {{ d.text }}
           </option>
         </select>
+                <span class="text-danger" *ngIf="
+            _appointmentModel.get('fromtime').touched &&
+            (_appointmentModel.get('fromtime').errors?.required ||
+              _appointmentModel.get('fromtime').errors?.checkcustomrequired)
+          ">
+          Required
+        </span>
             </div>
             <div class="col" *ngIf="timearrayto.length > 0">
                 <label for="owner_id">To</label>
-                <select class="form-control" id="totime" required [(ngModel)]="_appointmentModel.totime" name="totime">
-          <option value="-1">Select</option>
+                <select class="form-control" id="totime" required formControlName="totime">
+          <option value="0">Select</option>
           <option *ngFor="let d of timearrayto" [value]="d.value">
             {{ d.text }}
           </option>
         </select>
+                <span class="text-danger" *ngIf="
+            _appointmentModel.get('totime').touched &&
+            (_appointmentModel.get('totime').errors?.required ||
+              _appointmentModel.get('totime').errors?.checkcustomrequired)
+          ">
+          Required
+        </span>
             </div>
         </div>
 
         <button (click)="addappointment()" class="btn btn-success">
       Create New Appointment
     </button>
+        <br> <b>NOTE : Here I am assuming that appointments may overlap with each other.</b>
     </div>
 
     <div *ngIf="submitted">
         <h4>Appointment created successfully !!</h4>
-        <button class="btn btn-success" (click)="addnewappointment()">Add</button>
+        <button class="btn btn-primary" (click)="addnewappointment()">
+      Add New
+    </button>
+        <button class="btn btn-success" (click)="viewappointments()">
+      View Appointments
+    </button>
     </div>
 </div>

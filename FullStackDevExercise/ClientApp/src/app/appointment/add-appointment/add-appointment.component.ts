@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { appointmentModel } from 'src/app/models/appointmentModel';
 import { ownersModel } from 'src/app/models/ownerModel';
 import { petsModel } from 'src/app/models/pets';
 import { CrudServiceService } from 'src/app/services/crud-service.service';
+import { checkcustomrequired } from 'src/app/validators/checkcustomrequired';
 
 @Component({
   selector: 'app-add-appointment',
@@ -11,26 +19,32 @@ import { CrudServiceService } from 'src/app/services/crud-service.service';
 })
 export class AddAppointmentComponent implements OnInit {
   submitted: boolean = false;
-  _ownersmodel: ownersModel = new ownersModel();
-  _petsmodel: petsModel = new petsModel();
-  _appointmentModel: appointmentModel = new appointmentModel();
+  _ownersmodel: ownersModel[] = [];
+  _petsmodel: petsModel[] = [];
+  _petsmodelAll: petsModel[] = [];
+  _appointmentModel: FormGroup = new FormGroup({});
   timearrayfrom: { text: string; value: number }[] = [];
   timearrayto: { text: string; value: number }[] = [];
-  constructor(private crudservice: CrudServiceService) {}
+  constructor(
+    private crudservice: CrudServiceService,
+    private router: Router,
+    private formgroup: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    for (let i = 0; i < 24; i++) {
-      if (i < 12)
+    this.initform(new appointmentModel());
+    for (let i = 8; i < 23; i++) {
+      
         this.timearrayfrom.push({
           text: i.toString().padStart(2, '0') + ':00',
           value: i,
         });
-    }
+    }    
     this.crudservice.getowners().subscribe((rr: any) => {
       this._ownersmodel = rr;
       this.crudservice.getpets().subscribe(
         (response: any) => {
-          this._petsmodel = response;
+          this._petsmodelAll = response;
         },
         (error) => {
           alert('Something went wrong!!');
@@ -38,45 +52,81 @@ export class AddAppointmentComponent implements OnInit {
       );
     });
   }
-  changefrom() {
-    this.timearrayto = [];
-    if (this._appointmentModel.fromtime < 23)
-    {
-      for (let i = (parseInt(this._appointmentModel.fromtime.toString()) + 1); i < 24; i++) {
-        this.timearrayto.push({
-          text: i.toString().padStart(2, '0') + ':00',
-          value: i,
-        });
-      }
+  filterpets()
+  {
+    this._petsmodel= this._petsmodelAll.filter(a=> a.owner_id == this._appointmentModel.get('owner_id').value);  
+    this._appointmentModel.get('pet_id').patchValue('0');    
+  }
+changefrom() {
+  this.timearrayto = [];
+  if (parseInt(this._appointmentModel.get('fromtime').value) < 23) {
+    for (
+      let i = parseInt(this._appointmentModel.get('fromtime').value) + 1;
+      i < 23;
+      i++
+    ) {
+      this.timearrayto.push({
+        text: i.toString().padStart(2, '0') + ':00',
+        value: i,
+      });
+    }
+    this._appointmentModel.get('totime').patchValue('0');
+  }
+}
+  initform(appointmentdata: appointmentModel) {
+    this._appointmentModel = this.formgroup.group({
+      owner_id: new FormControl(appointmentdata.owner_id, [
+        Validators.required, checkcustomrequired()
+      ]),
+      pet_id: new FormControl(appointmentdata.pet_id, [Validators.required,checkcustomrequired()]),
+      date: new FormControl(appointmentdata.date, [Validators.required]),
+      fromtime: new FormControl(appointmentdata.fromtime, [
+        Validators.required,checkcustomrequired()
+      ]),
+      totime: new FormControl(appointmentdata.totime, [Validators.required,checkcustomrequired()]),
+    });
+  }
+ 
+  addappointment() {
+    if (this._appointmentModel.valid) {
+      this.submitted = false;
+      this._appointmentModel
+        .get('owner_id')
+        .patchValue(parseInt(this._appointmentModel.get('owner_id').value));
+      this._appointmentModel
+        .get('pet_id')
+        .patchValue(parseInt(this._appointmentModel.get('pet_id').value));
+      this._appointmentModel
+        .get('fromtime')
+        .patchValue(parseInt(this._appointmentModel.get('fromtime').value));
+      this._appointmentModel
+        .get('totime')
+        .patchValue(parseInt(this._appointmentModel.get('totime').value));
+      this._appointmentModel
+        .get('date')
+        .patchValue(this._appointmentModel.get('date').value.toString());
+
+      this.crudservice
+        .createappointment(this._appointmentModel.value)
+        .subscribe(
+          (response: any) => {
+            this.submitted = true;
+          },
+          (error) => {
+            this.submitted = false;
+            alert('Something went wrong!!');
+          }
+        );
+    } else {
+      this._appointmentModel.markAllAsTouched();
+      this._appointmentModel.updateValueAndValidity();
     }
   }
-  addappointment() {
-    this.submitted = false;
-    this._appointmentModel.owner_id = parseInt(
-      this._appointmentModel.owner_id.toString()
-    );
-    this._appointmentModel.pet_id = parseInt(
-      this._appointmentModel.pet_id.toString()
-    );
-    this._appointmentModel.fromtime = parseInt(
-      this._appointmentModel.fromtime.toString()
-    );
-    this._appointmentModel.totime = parseInt(
-      this._appointmentModel.totime.toString()
-    );
-    this._appointmentModel.date = this._appointmentModel.date.toString();
-    this.crudservice.createappointment(this._appointmentModel).subscribe(
-      (response: any) => {
-        this.submitted = true;
-      },
-      (error) => {
-        this.submitted = false;
-        alert('Something went wrong!!');
-      }
-    );
-  }
   addnewappointment() {
-    this._appointmentModel = new appointmentModel();
+    this.initform(new appointmentModel());
     this.submitted = false;
+  }
+  viewappointments() {
+    this.router.navigate(['/appointments']);
   }
 }

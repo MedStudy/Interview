@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,9 +33,11 @@ namespace FullStackDevExercise
 
       services.AddControllersWithViews();
       
-      services.AddSingleton<Iowner, owners>();
-      services.AddSingleton<Ipets, Pets>();
-      services.AddSingleton<Iappointment, appointments>();
+      services.AddDbContext<MedDbContext>(options => options.UseSqlite("Data Source=dolittle.db"));
+      services.AddTransient<Iowner, ownersRepository>();
+      services.AddTransient<Ipets, petsRepository>();
+      services.AddTransient<Iappointment, appointmentRepository>();
+
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
       {

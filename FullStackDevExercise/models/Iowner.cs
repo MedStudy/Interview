@@ -7,16 +7,12 @@ namespace FullStackDevExercise.models
 {
   public interface Iowner
   {
-    public int id { get; set; }
-    public string first_name { get; set; }
-    public string last_name { get; set; }
-
-    public IEnumerable<Iowner> getAllowners();
-    public Iowner getowners(string id);
-    public Iowner updateowner(Iowner data);
+    public IEnumerable<owners> getAllowners();
+    public owners getowners(string id);
+    public owners updateowner(owners data);
     public string deleteowner(string id);
 
-    public Iowner createowner(Iowner data);
+    public owners createowner(owners data);
 
   }
 }

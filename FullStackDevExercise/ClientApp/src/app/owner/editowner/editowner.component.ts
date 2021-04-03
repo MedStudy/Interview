@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ownersModel } from 'src/app/models/ownerModel';
 import { CrudServiceService } from 'src/app/services/crud-service.service';
@@ -10,21 +11,35 @@ import { CrudServiceService } from 'src/app/services/crud-service.service';
 })
 export class EditownerComponent implements OnInit {
   submitted: boolean = false;
-  _ownersModel: ownersModel = new ownersModel();
+  _ownersModel: FormGroup = new FormGroup({});
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private crudservice: CrudServiceService
+    private crudservice: CrudServiceService,
+    private formgroup: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.fetchowner(parseInt(this.route.snapshot.paramMap.get('id')));
+    this._ownersModel = this.formgroup.group({
+      id:new FormControl(-1),
+      first_name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      last_name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+    });
+    this.fetchowner(parseInt(this.route.snapshot.paramMap.get('id')));    
   }
   fetchowner(id: number) {
-    this._ownersModel = new ownersModel();
+    this._ownersModel.reset();
+    this._ownersModel.updateValueAndValidity();
     this.crudservice.getparticularowners(id).subscribe(
       (response: any) => {
-        this._ownersModel = response;
+        this._ownersModel.setValue(response);
+        this._ownersModel.updateValueAndValidity();
       },
       (error) => {
         alert('Something went wrong!!');
@@ -35,9 +50,10 @@ export class EditownerComponent implements OnInit {
     this.router.navigate(['/owners']);
   }
   editOwner() {
+    if (this._ownersModel.valid) {
     this.submitted = false;
 
-    this.crudservice.updateowner(this._ownersModel).subscribe(
+    this.crudservice.updateowner(this._ownersModel.value).subscribe(
       (response: any) => {
         this.submitted = true;
       },
@@ -47,4 +63,6 @@ export class EditownerComponent implements OnInit {
       }
     );
   }
+  else this._ownersModel.markAllAsTouched();
+}
 }

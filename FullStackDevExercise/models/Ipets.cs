@@ -7,17 +7,12 @@ namespace FullStackDevExercise.models
 {
   public interface Ipets
   {
-    public int id { get; set; }
-    public int owner_id { get; set; }
-    public string type { get; set; }
-    public string name { get; set; }
-    public int age { get; set; }
 
-    public IEnumerable<Ipets> getAllpets();
-    public Ipets getpets(string id);
-    public Ipets updatepet(Ipets data);
+    public IEnumerable<PetsList> getAllpets();
+    public PetsList getpets(string id);
+    public Pets updatepet(Pets data);
     public string deletepet(string id);
 
-    public Ipets createpet(Ipets data);
+    public Pets createpet(Pets data);
   }
 }

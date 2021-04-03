@@ -33,7 +33,7 @@ namespace FullStackDevExercise
     private static void CreateOwnersTable(SqliteConnection connection)
     {
       var createTable = connection.CreateCommand();
-      createTable.CommandText = @"
+      createTable.CommandText = @" DROP TABLE IF EXISTS owners;
         CREATE TABLE IF NOT EXISTS owners
         (
           id INTEGER PRIMARY KEY AUTOINCREMENT
@@ -47,7 +47,7 @@ namespace FullStackDevExercise
     private static void CreatePetsTable(SqliteConnection connection)
     {
       var createTable = connection.CreateCommand();
-      createTable.CommandText = @"
+      createTable.CommandText = @" DROP TABLE IF EXISTS pets;
         CREATE TABLE IF NOT EXISTS pets
         (
           id INTEGER PRIMARY KEY AUTOINCREMENT
@@ -64,7 +64,7 @@ namespace FullStackDevExercise
     private static void CreateAppointmentsTable(SqliteConnection connection)
     {
       var createTable = connection.CreateCommand();
-      createTable.CommandText = @"
+      createTable.CommandText = @" DROP TABLE IF EXISTS appointments;
         CREATE TABLE IF NOT EXISTS appointments
         (
           id INTEGER PRIMARY KEY AUTOINCREMENT
