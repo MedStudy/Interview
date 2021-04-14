@@ -1,15 +1,23 @@
+using FSDExercise.Core.Configurations;
+using FSDExercise.DB;
+using FSDExercise.DB.Actions;
+using FSDExercise.Infra.Configurations;
+using FullStackDevExercise.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace FullStackDevExercise
 {
     public class Startup
     {
+        private readonly long maxRequestSizeAllowed = 3200000000;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +33,19 @@ namespace FullStackDevExercise
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.AddSingleton<FSDExerciseDBContext>();
+            services.AddScoped<IDBOperations, DBOperations>();
+            services.AddFSDExerciseCoreWrapper();
+            services.AddFSDExerciseInfraWrapper();
+            services.AddSwaggerGen(options =>
+            {
+              options.SwaggerDoc("v1", new OpenApiInfo
+              {
+                Title = "DoLittle",
+                Version = "v1"
+              });
             });
         }
 
@@ -48,14 +69,19 @@ namespace FullStackDevExercise
             {
                 app.UseSpaStaticFiles();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+              c.SwaggerEndpoint("/swagger/v1/swagger.json", "DoLittle Api");
+            });
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+              endpoints.MapControllers();
+              //endpoints.MapControllerRoute(
+              //      name: "default",
+              //      pattern: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -70,6 +96,20 @@ namespace FullStackDevExercise
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+            app.Use(async (context, next) =>
+            {
+              context.Features.Get<IHttpMaxRequestBodySizeFeature>().MaxRequestBodySize = maxRequestSizeAllowed;
+              await next.Invoke();
+            });
+
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{              
+            //  c.SwaggerEndpoint("/swagger/v1/swagger.json", "DoLittle Api");              
+            //});
+
         }
     }
 }

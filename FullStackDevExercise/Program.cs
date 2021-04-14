@@ -16,12 +16,14 @@ namespace FullStackDevExercise
     {
       var connectionStringBuilder = new SqliteConnectionStringBuilder();
       connectionStringBuilder.DataSource = "./dolittle.db";
+      //connectionStringBuilder.DataSource = "./testintv.db";
 
       using var connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
       connection.Open();
       SetupDB(connection);
       CreateOwnersTable(connection);
       CreatePetsTable(connection);
+      CreateAppointmentsTable(connection);
     }
 
     private static void SetupDB(SqliteConnection connection) { 
@@ -55,6 +57,26 @@ namespace FullStackDevExercise
           , name VARCHAR(50) NOT NULL
           , age INT NOT NULL
           , FOREIGN KEY (owner_id) REFERENCES owners(id) ON DELETE CASCADE ON UPDATE NO ACTION 
+        )
+      ";
+      createTable.ExecuteNonQuery();
+    }
+
+    private static void CreateAppointmentsTable(SqliteConnection connection)
+    {
+      var createTable = connection.CreateCommand();
+      createTable.CommandText = @"
+        CREATE TABLE IF NOT EXISTS appointments
+        (
+          id INTEGER PRIMARY KEY
+          , appointee_id INT NOT NULL
+          , appointmentdate date NOT NULL
+          , starttime time NOT NULL
+          , endtime time NOT NULL
+          , pet_id INT NOT NULL
+          , status VARCHAR(50) NOT NULL
+          , FOREIGN KEY (appointee_id) REFERENCES owners(id) ON DELETE CASCADE ON UPDATE NO ACTION
+          , FOREIGN KEY (pet_id) REFERENCES pets(id) ON DELETE CASCADE ON UPDATE NO ACTION 
         )
       ";
       createTable.ExecuteNonQuery();
