@@ -1,0 +1,76 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50vh;
+  }
+
+mat-drawer-container {
+    height: 100%;
+}
+
+mat-drawer,
+mat-drawer-content {
+    transition-duration: .4s;
+    transition-timing-function: cubic-bezier(.25, .8, .25, 1);
+}
+
+mat-drawer {
+    width: 250px;
+    background-color: #8ca5ff;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    transition-property: width;
+    .sidenav-header {
+        background-color: #000000;
+        height: 64px;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        span {
+            font-size: 2em;
+            color: #ffffff;
+        }
+    }
+    ul {
+        padding: 0;
+        li {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            list-style: none;
+            cursor: pointer;
+            margin: 10px;
+            padding: 10px;
+            background-color: #000000;
+            border-radius: 5px;
+        }
+    }
+}
+
+mat-drawer-content {
+    transition-property: transform, margin-left, margin-right;
+}
+
+mat-card {
+    margin: 10px;
+}
+
+@media (max-width: 600px) {
+    mat-toolbar {
+        flex-direction: row-reverse !important;
+    }
+}

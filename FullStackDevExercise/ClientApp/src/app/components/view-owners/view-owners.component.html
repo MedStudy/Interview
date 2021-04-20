@@ -1,0 +1,21 @@
+<table  >
+	<thead>
+		<tr>
+			<th>Owner Id</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Actions</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let data of dataSource">
+			<td>{{data.id}}</td>
+			<td>{{data.first_name}}</td>
+			<td>{{data.last_name}}</td>
+			<td>    <button mat-raised-button (click)="deleteOwner(data.id)">Delete</button>
+			</td>
+
+		</tr>
+	</tbody>
+</table>

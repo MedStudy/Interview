@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 
 namespace FullStackDevExercise
 {
@@ -20,14 +22,36 @@ namespace FullStackDevExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
+
+      services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("EmployeeAppCon")));
+
+
+      //Enable CORS
+      services.AddCors(c =>
+      {
+        c.AddPolicy("mycors", options => options.AllowAnyOrigin().AllowAnyMethod()
+         .AllowAnyHeader());
+      });
+
+      //JSON Serializer
+      services.AddControllersWithViews()
+          .AddNewtonsoftJson(options =>
+          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft
+          .Json.ReferenceLoopHandling.Ignore)
+          .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
+          = new DefaultContractResolver());
+
+
+
+      services.AddControllers();
+
+      // In production, the Angular files will be served from this directory
+      services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -48,8 +72,8 @@ namespace FullStackDevExercise
             {
                 app.UseSpaStaticFiles();
             }
-
             app.UseRouting();
+            app.UseCors("mycors");
 
             app.UseEndpoints(endpoints =>
             {
@@ -57,6 +81,7 @@ namespace FullStackDevExercise
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+
 
             app.UseSpa(spa =>
             {
