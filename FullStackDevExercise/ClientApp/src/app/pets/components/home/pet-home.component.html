@@ -1,0 +1,49 @@
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          Pets
+        </mat-card-title>
+        <mat-card-subtitle>
+          <button mat-raised-button color="primary">Create New Pet</button>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content *ngIf="petList.length == 0;">
+        No Pets!!
+      </mat-card-content>
+      <mat-card-content *ngIf="petList.length > 0;">
+    <table style="padding:5px;" class="mat-elevation-z8" #innerTables mat-table #table [dataSource]="petDataSource" multiTemplateDataRows>
+  
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td *matCellDef="let pet"> {{pet.name}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Age">
+          <th mat-header-cell *matHeaderCellDef> Age </th>
+          <td *matCellDef="let pet"> {{pet.age}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td *matCellDef="let pet"> {{pet.type}} </td>
+          </ng-container>
+
+        <ng-container matColumnDef = "Actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let pet" >
+            <button  mat-mini-fab (click)="edit(pet);">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button  mat-mini-fab style="margin-left:10px;" color ="warn" (click) = "delete(pet);">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="petColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: petColumns;">
+        </tr>
+    </table>
+    </mat-card-content>
+  

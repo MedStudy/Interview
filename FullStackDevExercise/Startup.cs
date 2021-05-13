@@ -1,6 +1,10 @@
+using FullStackDevExercise.Common;
+using FullStackDevExercise.Data;
+using FullStackDevExercise.Data.MapperProfile;
+using FullStackDevExercise.MapperProfile;
+using FullStackDevExercise.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,24 +12,43 @@ using Microsoft.Extensions.Hosting;
 
 namespace FullStackDevExercise
 {
-    public class Startup
+  public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Config.ConnectionString = configuration.GetConnectionString("SqliteDataSource");
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+    // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
+              services.AddControllersWithViews();
+              // In production, the Angular files will be served from this directory
+              services.AddSpaStaticFiles(configuration =>
+              {
                 configuration.RootPath = "ClientApp/dist";
-            });
+              });
+
+              services.AddHttpContextAccessor();
+
+              DataDependencies.Initialize(services);
+
+              CommonDependencies.Initialize(services);
+
+              ServiceDependencies.Initialize(services);
+
+              var config = new AutoMapper.MapperConfiguration(cfg =>
+              {
+                cfg.AddProfile(new ModelEntityMapperProfile());
+                cfg.AddProfile(new ModelViewModelMapperProfile());
+              });
+
+              var mapper = config.CreateMapper();
+
+              services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,7 +90,8 @@ namespace FullStackDevExercise
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
         }
