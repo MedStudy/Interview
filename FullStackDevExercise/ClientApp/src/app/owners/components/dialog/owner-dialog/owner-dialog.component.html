@@ -1,0 +1,20 @@
+<mat-dialog-content class="mat-typography">
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{action}} Owner
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" [(ngModel)]="owner.firstName">
+        <br/>
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" [(ngModel)]="owner.lastName">
+    </mat-card-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button color ="primary" (click)="executeAction()">{{action}}</button>
+        <button mat-button color="warn" [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
+    </mat-dialog-actions>
+</mat-card>
+</mat-dialog-content>

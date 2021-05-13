@@ -7,11 +7,12 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AppHeaderComponent } from './components/appheader/appheader.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 
 
 @NgModule({
-  declarations: [NavBarComponent, AppHeaderComponent],
+  declarations: [NavBarComponent, AppHeaderComponent, DeleteDialogComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
   exports:[
     NavBarComponent,
     AppHeaderComponent,
-    MaterialModule
+    MaterialModule,
+    DeleteDialogComponent
   ]
 })
 export class SharedServicesModule { }

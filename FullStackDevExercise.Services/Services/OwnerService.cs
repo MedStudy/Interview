@@ -32,7 +32,7 @@ namespace FullStackDevExercise.Services.Services
 
         public async Task<IEnumerable<OwnerModel>> GetOwnerListAsync()
         {
-            return await _ownerRepository.GetList();
+             return await _ownerRepository.GetOwnerList();
         }
 
         public async Task<bool> UpdateOwnerAsync(long id, OwnerModel ownerModel)

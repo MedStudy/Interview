@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PetHomeComponent } from './home.component';
+import { OwnerDialogComponent } from './owner-dialog.component';
 
-describe('PetHomeComponent', () => {
-  let component: PetHomeComponent;
-  let fixture: ComponentFixture<PetHomeComponent>;
+describe('OwnerDialogComponent', () => {
+  let component: OwnerDialogComponent;
+  let fixture: ComponentFixture<OwnerDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PetHomeComponent ]
+      declarations: [ OwnerDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PetHomeComponent);
+    fixture = TestBed.createComponent(OwnerDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Owner } from 'src/app/shared-services/models/owner';
-import {BackendService} from '../../shared-services/services/backend.service.service'
+import { BackendService } from '../../shared-services/services/backend.service.service'
 
 @Injectable({
   providedIn: 'root'

@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './components/home/home.component';
-import { RouterModule } from '@angular/router';
-import { routes } from './pets.routes';
+import { PetHomeComponent } from './components/home/home.component';
+import { SharedServicesModule } from '../shared-services/shared-services.module';
 
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [PetHomeComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    SharedServicesModule
+  ],
+  exports:[
+    PetHomeComponent
   ]
 })
 export class PetsModule { }

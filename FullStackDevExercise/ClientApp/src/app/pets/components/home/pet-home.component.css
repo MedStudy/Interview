@@ -15,11 +15,11 @@ table {
   }
   
   .example-element-row td {
+    width: max-content;
     border-bottom-width: 0;
   }
   
   .example-element-detail {
-    width: 100% !important;
     overflow: hidden;
     display: flex;
   }

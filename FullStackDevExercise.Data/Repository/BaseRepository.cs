@@ -12,7 +12,7 @@ namespace FullStackDevExercise.Data.Repository
         TEntity : EntityBase, new()
         where TModel : ModelBase, new()
     {
-        private readonly DoLittleDbContext _context;
+        internal readonly DoLittleDbContext _context;
         internal readonly IMapperExtension _mapper;
         internal DbSet<TEntity> _dbSet;
 
