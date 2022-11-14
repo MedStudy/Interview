@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>CleanArchitecture.Application</RootNamespace>
+    <AssemblyName>CleanArchitecture.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TodoItems\**" />
+    <Compile Remove="TodoLists\**" />
+    <Compile Remove="WeatherForecasts\**" />
+    <EmbeddedResource Remove="TodoItems\**" />
+    <EmbeddedResource Remove="TodoLists\**" />
+    <EmbeddedResource Remove="WeatherForecasts\**" />
+    <EntityDeploy Remove="TodoItems\**" />
+    <EntityDeploy Remove="TodoLists\**" />
+    <EntityDeploy Remove="WeatherForecasts\**" />
+    <None Remove="TodoItems\**" />
+    <None Remove="TodoLists\**" />
+    <None Remove="WeatherForecasts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Common\Behaviours\AuthorizationBehaviour.cs" />
+    <Compile Remove="Common\Behaviours\LoggingBehaviour.cs" />
+    <Compile Remove="Common\Behaviours\PerformanceBehaviour.cs" />
+    <Compile Remove="Common\Behaviours\UnhandledExceptionBehaviour.cs" />
+    <Compile Remove="Common\Behaviours\ValidationBehaviour.cs" />
+    <Compile Remove="Common\Interfaces\ICsvFileBuilder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="FluentValidation" Version="9.2.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.2.0" />
+    <PackageReference Include="LinqKit" Version="1.2.3" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Behaviours\" />
+    <Folder Include="Customer\Commands\" />
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
+</Project>
