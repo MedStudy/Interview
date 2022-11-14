@@ -12,11 +12,11 @@ import { Customer } from '../../models/customer';
   selector: 'app-Customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  
 })
 export class CustomersComponent implements OnInit {
   displayedColumns: string[] = ['ID', 'FirstName', 'LastName', 'Year'];
-  filterCustomer:Customer={id:1,firstName:"test",lastName:"test",year:0 };
+  filterCustomer:Customer={id:1,firstName:"",lastName:"",year:0 };
   isLoading$: Observable<boolean>
   error$: Observable<string | null>;
   Customers$: Observable<Customer[]>;
