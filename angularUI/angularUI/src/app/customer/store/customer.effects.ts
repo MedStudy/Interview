@@ -28,7 +28,7 @@ export class CustomerEffects {
         switchMap(action => this.service.search(action.searchQuery)
         .pipe(
           delay(1000),
-          map(data => loadCustomers({Customers: data}))
+          map(data => loadCustomers({Customers: data.customers}))
         ))
       )
   );

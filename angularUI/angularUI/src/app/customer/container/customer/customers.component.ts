@@ -15,9 +15,9 @@ import { Customer } from '../../models/customer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomersComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  filterCustomer:any={};
-  isLoading$: Observable<boolean>;
+  displayedColumns: string[] = ['ID', 'FirstName', 'LastName', 'Year'];
+  filterCustomer:Customer={id:1,firstName:"test",lastName:"test",year:0 };
+  isLoading$: Observable<boolean>
   error$: Observable<string | null>;
   Customers$: Observable<Customer[]>;
  
@@ -37,15 +37,8 @@ export class CustomersComponent implements OnInit {
   addCustomerCart(Customer: Customer): void {
     this.store.dispatch(fromCartActions.addToCart());
   }
-  applyFilter(filterValue: string) {
-    const tableFilters = [];
-    tableFilters.push({
-      id: 'name',
-      value: filterValue
-    });
-
-
-    this.store.dispatch(fromActions.searchCustomer(this.filterCustomer));
+  applyFilter() {
+        this.store.dispatch(fromActions.searchCustomer({ searchQuery: this.filterCustomer }));
   }
 
 }

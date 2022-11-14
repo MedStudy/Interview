@@ -29,5 +29,5 @@ export const deleteCustomer = createAction(
 
 export const searchCustomer = createAction(
   '[Customer/API] Search Customers',
-  props<{ searchQuery: any }>()
+  props<{ searchQuery: Customer }>()
 );

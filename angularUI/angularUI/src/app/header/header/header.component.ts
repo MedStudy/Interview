@@ -26,14 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   watchSearch(): void {
-    of(this.searchQuery)
-      .pipe(
-        map(value => value.trim()),
-        debounceTime(2000),
-        distinctUntilChanged(),
-        takeUntil(this.destroySub)
-      )
-      .subscribe(query => this.store.dispatch(searchCustomer({ searchQuery: query })));
+   
   }
   
 

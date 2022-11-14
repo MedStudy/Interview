@@ -1,5 +1,5 @@
 using CleanArchitecture.Domain.Common;
-\namespace CleanArchitecture.Domain.Entities
+namespace CleanArchitecture.Domain.Entities
 {
   public class Customer : AuditableEntity
   {
