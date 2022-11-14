@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,14 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Files\Maps\**" />
-    <EmbeddedResource Remove="Files\Maps\**" />
-    <EntityDeploy Remove="Files\Maps\**" />
-    <None Remove="Files\Maps\**" />
+    <Compile Remove="Identity\**" />
+    <Compile Remove="Persistence\Configurations\**" />
+    <Compile Remove="Persistence\Migrations\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Identity\**" />
+    <EmbeddedResource Remove="Persistence\Configurations\**" />
+    <EmbeddedResource Remove="Persistence\Migrations\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <EntityDeploy Remove="Identity\**" />
+    <EntityDeploy Remove="Persistence\Configurations\**" />
+    <EntityDeploy Remove="Persistence\Migrations\**" />
+    <EntityDeploy Remove="Services\**" />
+    <None Remove="Identity\**" />
+    <None Remove="Persistence\Configurations\**" />
+    <None Remove="Persistence\Migrations\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Files\CsvFileBuilder.cs" />
+    <Compile Remove="Persistence\ApplicationDbContextSeed.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Identity\ApplicationUser.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +45,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Files\" />
   </ItemGroup>
 
 </Project>

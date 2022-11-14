@@ -7,6 +7,7 @@ using CleanArchitecture.Application.TodoLists.Queries.GetTodos;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Repository;
 using MediatR;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace CleanArchitecture.Application.TodoItems.Queries.GetTodoItemsWithPagina
   {
     public int ListId { get; set; }
     public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = 10;
+    public int PageSize { get; set; } = 55;
   }
 
   public class SearchCustomersWithPaginationQueryHandler : IRequestHandler<SearchCustomersWithPaginationQuery, PaginatedList<CustomerDto>>
@@ -30,6 +31,7 @@ namespace CleanArchitecture.Application.TodoItems.Queries.GetTodoItemsWithPagina
     {
       _customer = customer;
       _mapper = mapper;
+      _unit = unit;
     }
 
     public async Task<PaginatedList<CustomerDto>> Handle(SearchCustomersWithPaginationQuery request, CancellationToken cancellationToken)
@@ -37,7 +39,7 @@ namespace CleanArchitecture.Application.TodoItems.Queries.GetTodoItemsWithPagina
 
       await LoadData();
       var customers = _customer.FindAll()
-          .Where(x => x.Id == request.ListId)
+         // .Where(x => x.Id == request.ListId)
           .OrderBy(x => x.FirstName)
           .ProjectTo<CustomerDto>(_mapper.ConfigurationProvider)
           .PaginatedListAsync(request.PageNumber, request.PageSize); ;
@@ -48,7 +50,8 @@ namespace CleanArchitecture.Application.TodoItems.Queries.GetTodoItemsWithPagina
     {
       for (int i = 0; i < 1000; i++)
       {
-        _customer.Create(new Customer { Id = 1, FirstName="FirstTest"+i,LastName="LastTest"+i, Year=2010 });
+        Random rd = new Random();
+        _customer.Create(new Customer { Id = rd.Next(), FirstName="FirstTest"+i,LastName="LastTest"+i, Year=2010 });
       }
       await _unit.CompleteAsync();
 

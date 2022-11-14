@@ -25,9 +25,7 @@ namespace CleanArchitecture.Infrastructure.Persistence
             
         }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
-
-        public DbSet<TodoList> TodoLists { get; set; }
+       
 
 
     public DbSet<Customer> Customers { get; set; }
