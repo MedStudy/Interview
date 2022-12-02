@@ -1,0 +1,12 @@
+D:\MedStudy\MedStudy\MedStudy.Model\bin\Debug\net6.0\MedStudy.Model.deps.json
+D:\MedStudy\MedStudy\MedStudy.Model\bin\Debug\net6.0\MedStudy.Model.dll
+D:\MedStudy\MedStudy\MedStudy.Model\bin\Debug\net6.0\MedStudy.Model.pdb
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.csproj.AssemblyReference.cache
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.AssemblyInfoInputs.cache
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.AssemblyInfo.cs
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.csproj.CoreCompileInputs.cache
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.dll
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\refint\MedStudy.Model.dll
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\MedStudy.Model.pdb
+D:\MedStudy\MedStudy\MedStudy.Model\obj\Debug\net6.0\ref\MedStudy.Model.dll

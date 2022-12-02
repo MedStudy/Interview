@@ -1,0 +1,15 @@
+D:\MedStudy\MedStudy\MedStudy.DataAccess\bin\Debug\net6.0\MedStudy.DataAccess.deps.json
+D:\MedStudy\MedStudy\MedStudy.DataAccess\bin\Debug\net6.0\MedStudy.DataAccess.dll
+D:\MedStudy\MedStudy\MedStudy.DataAccess\bin\Debug\net6.0\MedStudy.DataAccess.pdb
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.csproj.AssemblyReference.cache
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.AssemblyInfoInputs.cache
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.AssemblyInfo.cs
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.csproj.CoreCompileInputs.cache
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.dll
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\refint\MedStudy.DataAccess.dll
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.pdb
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\ref\MedStudy.DataAccess.dll
+D:\MedStudy\MedStudy\MedStudy.DataAccess\bin\Debug\net6.0\MedStudy.Model.dll
+D:\MedStudy\MedStudy\MedStudy.DataAccess\bin\Debug\net6.0\MedStudy.Model.pdb
+D:\MedStudy\MedStudy\MedStudy.DataAccess\obj\Debug\net6.0\MedStudy.DataAccess.csproj.CopyComplete

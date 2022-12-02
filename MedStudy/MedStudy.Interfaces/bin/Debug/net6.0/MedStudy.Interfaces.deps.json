@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MedStudy.Interfaces/1.0.0": {
+        "dependencies": {
+          "MedStudy.Model": "1.0.0"
+        },
+        "runtime": {
+          "MedStudy.Interfaces.dll": {}
+        }
+      },
+      "MedStudy.Model/1.0.0": {
+        "runtime": {
+          "MedStudy.Model.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MedStudy.Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MedStudy.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
