@@ -1,0 +1,15 @@
+D:\MedStudy\MedStudy\MedStudy.Interfaces\bin\Debug\net6.0\MedStudy.Interfaces.deps.json
+D:\MedStudy\MedStudy\MedStudy.Interfaces\bin\Debug\net6.0\MedStudy.Interfaces.dll
+D:\MedStudy\MedStudy\MedStudy.Interfaces\bin\Debug\net6.0\MedStudy.Interfaces.pdb
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.csproj.AssemblyReference.cache
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.AssemblyInfoInputs.cache
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.AssemblyInfo.cs
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.csproj.CoreCompileInputs.cache
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.dll
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\refint\MedStudy.Interfaces.dll
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.pdb
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\ref\MedStudy.Interfaces.dll
+D:\MedStudy\MedStudy\MedStudy.Interfaces\bin\Debug\net6.0\MedStudy.Model.dll
+D:\MedStudy\MedStudy\MedStudy.Interfaces\bin\Debug\net6.0\MedStudy.Model.pdb
+D:\MedStudy\MedStudy\MedStudy.Interfaces\obj\Debug\net6.0\MedStudy.Interfaces.csproj.CopyComplete

@@ -1,0 +1,322 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\MedStudy\\MedStudy\\MedStudy.ApplicationServices\\MedStudy.ApplicationServices.csproj": {}
+  },
+  "projects": {
+    "D:\\MedStudy\\MedStudy\\MedStudy.ApplicationServices\\MedStudy.ApplicationServices.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MedStudy\\MedStudy\\MedStudy.ApplicationServices\\MedStudy.ApplicationServices.csproj",
+        "projectName": "MedStudy.ApplicationServices",
+        "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.ApplicationServices\\MedStudy.ApplicationServices.csproj",
+        "packagesPath": "C:\\Users\\prane\\.nuget\\packages\\",
+        "outputPath": "D:\\MedStudy\\MedStudy\\MedStudy.ApplicationServices\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\MedStudy\\MedStudy\\MedStudy.Common\\MedStudy.Common.csproj": {
+                "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Common\\MedStudy.Common.csproj"
+              },
+              "D:\\MedStudy\\MedStudy\\MedStudy.DataAccess\\MedStudy.DataAccess.csproj": {
+                "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.DataAccess\\MedStudy.DataAccess.csproj"
+              },
+              "D:\\MedStudy\\MedStudy\\MedStudy.Interfaces\\MedStudy.Interfaces.csproj": {
+                "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Interfaces\\MedStudy.Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MedStudy\\MedStudy\\MedStudy.Common\\MedStudy.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MedStudy\\MedStudy\\MedStudy.Common\\MedStudy.Common.csproj",
+        "projectName": "MedStudy.Common",
+        "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Common\\MedStudy.Common.csproj",
+        "packagesPath": "C:\\Users\\prane\\.nuget\\packages\\",
+        "outputPath": "D:\\MedStudy\\MedStudy\\MedStudy.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MedStudy\\MedStudy\\MedStudy.DataAccess\\MedStudy.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MedStudy\\MedStudy\\MedStudy.DataAccess\\MedStudy.DataAccess.csproj",
+        "projectName": "MedStudy.DataAccess",
+        "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.DataAccess\\MedStudy.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\prane\\.nuget\\packages\\",
+        "outputPath": "D:\\MedStudy\\MedStudy\\MedStudy.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj": {
+                "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MedStudy\\MedStudy\\MedStudy.Interfaces\\MedStudy.Interfaces.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MedStudy\\MedStudy\\MedStudy.Interfaces\\MedStudy.Interfaces.csproj",
+        "projectName": "MedStudy.Interfaces",
+        "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Interfaces\\MedStudy.Interfaces.csproj",
+        "packagesPath": "C:\\Users\\prane\\.nuget\\packages\\",
+        "outputPath": "D:\\MedStudy\\MedStudy\\MedStudy.Interfaces\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj": {
+                "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj",
+        "projectName": "MedStudy.Model",
+        "projectPath": "D:\\MedStudy\\MedStudy\\MedStudy.Model\\MedStudy.Model.csproj",
+        "packagesPath": "C:\\Users\\prane\\.nuget\\packages\\",
+        "outputPath": "D:\\MedStudy\\MedStudy\\MedStudy.Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\prane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

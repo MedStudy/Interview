@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "U+ufXCAA+P1H+rY7+0iZ2qRTcSwCa/h8HgcUYsMtJDFmuyyI0k0/c+qKQ9TT9jo1jld/vyimCyOm0bTBbFw80A==",
+  "success": true,
+  "projectFilePath": "D:\\MedStudy\\MedStudy\\MedStudy.Common\\MedStudy.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\prane\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

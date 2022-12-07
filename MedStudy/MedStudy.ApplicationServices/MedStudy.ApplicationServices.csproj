@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MedStudy.Common\MedStudy.Common.csproj" />
+    <ProjectReference Include="..\MedStudy.DataAccess\MedStudy.DataAccess.csproj" />
+    <ProjectReference Include="..\MedStudy.Interfaces\MedStudy.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

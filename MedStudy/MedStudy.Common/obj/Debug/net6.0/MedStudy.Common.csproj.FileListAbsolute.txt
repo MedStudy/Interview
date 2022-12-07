@@ -1,0 +1,12 @@
+D:\MedStudy\MedStudy\MedStudy.Common\bin\Debug\net6.0\MedStudy.Common.deps.json
+D:\MedStudy\MedStudy\MedStudy.Common\bin\Debug\net6.0\MedStudy.Common.dll
+D:\MedStudy\MedStudy\MedStudy.Common\bin\Debug\net6.0\MedStudy.Common.pdb
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.csproj.AssemblyReference.cache
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.AssemblyInfoInputs.cache
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.AssemblyInfo.cs
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.csproj.CoreCompileInputs.cache
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.dll
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\refint\MedStudy.Common.dll
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\MedStudy.Common.pdb
+D:\MedStudy\MedStudy\MedStudy.Common\obj\Debug\net6.0\ref\MedStudy.Common.dll
